@@ -42,6 +42,11 @@ public class WeaponController : MonoBehaviour
         UpdateAmmoUI();
         //ÖØÖÃ¿ª»ð×´Ì¬
         fire = false;
+        //»»µ¯
+        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag) 
+        {
+            Reload();
+        }
         //Éä»÷
         if (Input.GetMouseButton(0))
         {
@@ -49,17 +54,21 @@ public class WeaponController : MonoBehaviour
             //²¥·ÅÉä»÷¶¯»­
             animator.SetBool("shooting", fire);
         }
-        //»»µ¯
-        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag) 
-        {
-            Reload();
-        }
+        
         fireTimer += Time.deltaTime;
     }
      bool Shoot()
     {
         //Éä»÷Ìõ¼þÅÐ¶¨
-        if(fireTimer < fireRate )
+        //¼ì²âÊÇ·ñÔÚ»»µ¯
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Reload"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                return false;
+            }
+        }
+        if (fireTimer < fireRate )
         {
             return false;
         }

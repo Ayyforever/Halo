@@ -56933,8 +56933,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1850416365}
-  playerSpeed: 5
-  jumpHeight: 1
+  playerSpeed: 10
+  runRate: 1.3
+  jumpHeight: 1.2
   gravityValue: -9.81
   walkingSound: {fileID: 0}
   runingSound: {fileID: 0}
@@ -56952,7 +56953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player_Object: {fileID: 1850416368}
   Player_Camera: {fileID: 1635767054}
-  Mouse_Speed: 100
+  Mouse_Speed: 130
 --- !u!4 &1850416368
 Transform:
   m_ObjectHideFlags: 0
@@ -56961,7 +56962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850416364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 1.4, z: 5.212}
+  m_LocalPosition: {x: 0, y: 1.4, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -59870,7 +59871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1943802439}
-  attackRange: 2
+  attackRange: 5
   attackCooldown: 2
   attackDamage: 10
   damageRange: 2

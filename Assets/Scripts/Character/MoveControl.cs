@@ -9,12 +9,13 @@ public class MoveControl : MonoBehaviour
     private bool groundedPlayer;
     [Range(1f, 20f)]
     public float playerSpeed = 10.0f;
-
+    public float runRate = 1.3f;
     //Ã¯‘æµ»¥˝
     private bool jumpWait;
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
 
+    private Animator animator;
 
     [Header("…˘“Ù…Ë÷√")]
     private AudioSource audioSource;
@@ -23,6 +24,7 @@ public class MoveControl : MonoBehaviour
 
     private void Start()
     {
+        animator =GameObject.Find("MainWp"). GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -31,6 +33,7 @@ public class MoveControl : MonoBehaviour
 
         GMove();
         YMove();
+        
        // FootstepSource();
         
     }
@@ -39,8 +42,19 @@ public class MoveControl : MonoBehaviour
     bool GMove()
     {
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+
         if (move != Vector3.zero)
-        {
+        { 
+            //≈‹≤Ω
+            if (Input.GetKey(KeyCode.LeftShift)|| Input.GetKey(KeyCode.RightShift))
+            {
+                move *= runRate;
+                animator.SetBool("run", true);
+            }
+            else
+            {
+                animator.SetBool("run", false);
+            }
             controller.Move(move * Time.deltaTime * playerSpeed);
             return true;
         }

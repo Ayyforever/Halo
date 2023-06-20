@@ -58,7 +58,7 @@ public class EnemyLogic : MonoBehaviour
         //检测是否攻击到玩家if
 
         //对玩家造成伤害
-        player.gameObject.GetComponent<PlayerHealth>().Damage(attackDamage);
+        //player.gameObject.GetComponent<PlayerHealth>().Damage(attackDamage);
         
     }
 }

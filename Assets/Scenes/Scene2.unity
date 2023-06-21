@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: cadf2750ee1ffb845a7d46814dd89f90, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &2389146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52998,15 +52998,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 490a45431bd3e53409f68971fed704df, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 490a45431bd3e53409f68971fed704df, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 490a45431bd3e53409f68971fed704df, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 490a45431bd3e53409f68971fed704df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -59951,7 +59951,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.8
+  m_Height: 1.7
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -59971,9 +59971,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1850416365}
-  playerSpeed: 15
-  runRate: 1.3
-  jumpHeight: 1.2
+  playerSpeed: 5.1
+  currentSpeed: 0
+  runRate: 2.5
+  jumpHeight: 1
   gravityValue: -9.81
   walkingSound: {fileID: 0}
   runingSound: {fileID: 0}

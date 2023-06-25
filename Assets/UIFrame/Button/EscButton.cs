@@ -19,6 +19,7 @@ public class EscButton : MonoBehaviour
         {
             Scene3 scene3 = new Scene3();
             GameRoot.GetInstance().SceneControl_Root.SceneLoad(scene3.SceneName, scene3);
+            //GameRoot.GetInstance().UIManager_Root.Push(new SettingsPanel());
         }
     }
 }

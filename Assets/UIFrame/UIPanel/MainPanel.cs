@@ -17,7 +17,7 @@ public class MainPanel : BasePanel
     public override void OnStart()
     {
         base.OnStart();
-        //UIMethods.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Character").onClick.AddListener(Character);
+        //UIMethods.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Keyboard Shortcut Key").onClick.AddListener(Character);
         //UIMethods.GetInstance().GetOrAddSingleComponentInChild<Slider>(ActiveObj, "Slider").onValueChanged.AddListener(Update);
     }
 

@@ -16,6 +16,10 @@ public class MouseControl : MonoBehaviour
 
 
     float PlayerRotation_Y = 0f;
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
 

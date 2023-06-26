@@ -7,17 +7,17 @@ public class MoveControl : MonoBehaviour
     public CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    [Range(1f, 20f)]
-    public float playerSpeed = 3.0f;
-    public float currentSpeed = 0.0f;
-    public float currentAcceleration = 1.0f; // 移动加速度
-    public float runRate = 2.5f;
+    [Range(10f,50f)]
+    public float playerSpeed = 30.0f;
+
     //跳跃等待
     private bool jumpWait;
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
 
-    private Animator animator;
+    public float runRate = 1.3f;
+
+    public Animator animator;
 
     [Header("声音设置")]
     private AudioSource audioSource;
@@ -26,7 +26,7 @@ public class MoveControl : MonoBehaviour
 
     private void Start()
     {
-        animator =GameObject.Find("MainWp"). GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -35,82 +35,32 @@ public class MoveControl : MonoBehaviour
 
         GMove();
         YMove();
-        
-       // FootstepSource();
-        
+        //FootstepSource();
+
     }
 
     //地面移动
     bool GMove()
     {
-        // 2023/6/21 16:25新增内容
-        float deltaTime = Time.deltaTime;
-        float horizontal_bool = Input.GetAxis("Horizontal");
-        float vertical_bool = Input.GetAxis("Vertical");
-        // 速度从0开始增加
-        if (horizontal_bool != 0 || vertical_bool != 0)
-        {
-            if (currentSpeed <= playerSpeed)
-            {
-                currentSpeed += 5.0f * currentAcceleration * deltaTime;
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    currentSpeed += 8.0f * currentAcceleration * deltaTime;
-                }
-            }
-            else
-            {
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    currentSpeed += 10.0f * currentAcceleration * deltaTime;
-                }
-                else
-                {
-                    currentSpeed -= 5.0f * currentAcceleration * deltaTime;
-                }
-                currentSpeed = Mathf.Clamp(currentSpeed, playerSpeed, playerSpeed * runRate);
-            }
-        }
-        else
-        {
-            currentSpeed = 0.3f * playerSpeed;
-        }
-        // 同时前/后进+左/右走，速度会叠加，应除以根号2
-        if (horizontal_bool * vertical_bool != 0)
-        {
-            horizontal_bool /= Mathf.Sqrt(2);
-            vertical_bool /= Mathf.Sqrt(2);
-        }// 2023/6/21 16:25新增内容结束
-
-
-        Vector3 move = transform.right * horizontal_bool + transform.forward * vertical_bool;
-
+        Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+        
         if (move != Vector3.zero)
-        { 
-            //跑步
-            if (Input.GetKey(KeyCode.LeftShift)|| Input.GetKey(KeyCode.RightShift))
+        {
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                //move *= runRate; 前面已有对shift疾跑的处理，此处可不写
-                animator.SetBool("run", true);
+                move *= runRate;
+                animator.CrossFadeInFixedTime("Running", 0.1f);
             }
-            else
-            {
-                animator.SetBool("run", false);
-            }
-            controller.Move(move * deltaTime * currentSpeed); // 修改：乘的是current speed（原先是playerspeed）
+            controller.Move(move * Time.deltaTime * playerSpeed);
             return true;
         }
         else
-        {
-            animator.SetBool("run", false); // 如果此处不设置回false，那么疾跑后停下来但依然按着shift键，就会一直播放疾跑动作
             return false;
-        }
-            
     }
-    
-   
-   //跳跃判断
-   void Jump()
+
+
+    //跳跃判断
+    void Jump()
     {
         if (Input.GetButtonDown("Jump"))
         {

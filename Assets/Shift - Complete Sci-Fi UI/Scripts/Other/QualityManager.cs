@@ -14,9 +14,9 @@ namespace Michsky.UI.Shift
         public SliderManager musicSlider;
         public SliderManager sfxSlider;
 
-        [Header("RESOLUTION")]
-        public HorizontalSelector resolutionSelector;
-        [System.Serializable]
+        //[Header("RESOLUTION")]
+        //public HorizontalSelector resolutionSelector;
+        //[System.Serializable]
         public class DynamicRes : UnityEvent<int> { }
         public DynamicRes clickEvent;
 
@@ -29,7 +29,7 @@ namespace Michsky.UI.Shift
             mixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat(musicSlider.sliderTag + "SliderValue")) * 20);
             mixer.SetFloat("SFX", Mathf.Log10(PlayerPrefs.GetFloat(sfxSlider.sliderTag + "SliderValue")) * 20);
 
-            resolutionSelector.itemList.RemoveRange(0, resolutionSelector.itemList.Count);
+            //resolutionSelector.itemList.RemoveRange(0, resolutionSelector.itemList.Count);
             resolutions = Screen.resolutions;
 
             int currentResolutionIndex = 0;
@@ -41,19 +41,19 @@ namespace Michsky.UI.Shift
                 if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 {
                     currentResolutionIndex = i;
-                    resolutionSelector.index = currentResolutionIndex;
+                    //resolutionSelector.index = currentResolutionIndex;
                 }
 
-                resolutionSelector.CreateNewItem(options[i]);
+                //resolutionSelector.CreateNewItem(options[i]);
                 // resolutionSelector.itemList[i].onValueChanged.AddListener(UpdateResolution);
             }
 
-            resolutionSelector.UpdateUI();
+            //resolutionSelector.UpdateUI();
         }
 
         public void UpdateResolution()
         {
-            clickEvent.Invoke(resolutionSelector.index);
+            //clickEvent.Invoke(resolutionSelector.index);
         }
 
         public void SetResolution(int resolutionIndex)

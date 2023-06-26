@@ -52,28 +52,28 @@ public class MoveControl : MonoBehaviour
         {
             if (currentSpeed <= playerSpeed)
             {
-                currentSpeed += 3.0f * currentAcceleration * deltaTime;
+                currentSpeed += 5.0f * currentAcceleration * deltaTime;
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    currentSpeed += 5.0f * currentAcceleration * deltaTime;
+                    currentSpeed += 8.0f * currentAcceleration * deltaTime;
                 }
             }
             else
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    currentSpeed += 6.0f * currentAcceleration * deltaTime;
+                    currentSpeed += 10.0f * currentAcceleration * deltaTime;
                 }
                 else
                 {
-                    currentSpeed -= 3.0f * currentAcceleration * deltaTime;
+                    currentSpeed -= 5.0f * currentAcceleration * deltaTime;
                 }
                 currentSpeed = Mathf.Clamp(currentSpeed, playerSpeed, playerSpeed * runRate);
             }
         }
         else
         {
-            currentSpeed = 0.0f;
+            currentSpeed = 0.3f * playerSpeed;
         }
         // 同时前/后进+左/右走，速度会叠加，应除以根号2
         if (horizontal_bool * vertical_bool != 0)

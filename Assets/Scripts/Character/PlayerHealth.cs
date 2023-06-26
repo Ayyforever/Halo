@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
+            Debug.Log("die");
             //Die();
         }
     }

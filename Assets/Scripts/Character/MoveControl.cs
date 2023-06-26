@@ -147,16 +147,16 @@ public class MoveControl : MonoBehaviour
     }
 
     //“∆∂Ø“Ù–ß
-    void FootstepSource()
-    {
-        if (controller.isGrounded && GMove())
-        {
-            audioSource.clip = walkingSound;
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-        }
-    }
+    //void FootstepSource()
+    //{
+    //    if (controller.isGrounded && GMove())
+    //    {
+    //        audioSource.clip = walkingSound;
+    //        if (!audioSource.isPlaying)
+    //        {
+    //            audioSource.Play();
+    //        }
+    //    }
+    //}
 
 }

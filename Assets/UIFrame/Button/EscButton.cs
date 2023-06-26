@@ -15,10 +15,11 @@ public class EscButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameRoot.GetInstance().UIManager_Root.stack_ui.Peek().uiType.Name != "SettingsPanel")
         {
-            Scene3 scene3 = new Scene3();
-            GameRoot.GetInstance().SceneControl_Root.SceneLoad(scene3.SceneName, scene3);
+            //GameRoot.GetInstance().UIManager_Root.Pop(false);
+            GameRoot.GetInstance().UIManager_Root.Push(new SettingsPanel());
+            transform.SetSiblingIndex(0);
             //GameRoot.GetInstance().UIManager_Root.Push(new SettingsPanel());
         }
     }

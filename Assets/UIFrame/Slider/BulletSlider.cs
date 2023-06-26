@@ -9,19 +9,20 @@ public class BulletSlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slider.value = 20;
+        slider.value = 30;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            slider.value = 30;
-        }
-        else if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            slider.value -= 1;
-        }
+        //Transform target = transform.Find("Player/ÉãÏñ»ú/Weapon/MainWp");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Camera camera = player.GetComponentInChildren<Camera>();
+        GameObject weapon = camera.transform.Find("Weapon").gameObject;
+        GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
+        WeaponController weaponController = mainWp.GetComponent<WeaponController>();
+
+        slider.value = weaponController.bulletLeft;
+
     }
 }

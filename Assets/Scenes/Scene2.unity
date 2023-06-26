@@ -52030,6 +52030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootorPoint: {fileID: 1539841515}
   range: 100
+  bulletLeft: 30
   animator: {fileID: 1635767057}
   AmmoTextUI: {fileID: 0}
 --- !u!95 &1635767057
@@ -58877,6 +58878,7 @@ GameObject:
   - component: {fileID: 1850416366}
   - component: {fileID: 1850416365}
   - component: {fileID: 1850416369}
+  - component: {fileID: 1850416370}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -58967,6 +58969,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+--- !u!81 &1850416370
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850416364}
+  m_Enabled: 1
 --- !u!1001 &1851500104
 PrefabInstance:
   m_ObjectHideFlags: 0

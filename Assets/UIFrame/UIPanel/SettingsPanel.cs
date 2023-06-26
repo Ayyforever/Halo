@@ -16,13 +16,14 @@ public class SettingsPanel : BasePanel
     public override void OnStart()
     {
         base.OnStart();
+        GameRoot.GetInstance().transform.SetAsFirstSibling();
         //UIMethods.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Keyboard Shortcut Key").onClick.AddListener(Character);
         //UIMethods.GetInstance().GetOrAddSingleComponentInChild<Slider>(ActiveObj, "Slider").onValueChanged.AddListener(Update);
     }
 
     private void Update(float value)
     {
-
+        GameRoot.GetInstance().transform.SetAsFirstSibling();
     }
 
     public override void OnEnable()

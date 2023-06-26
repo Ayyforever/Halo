@@ -19,7 +19,7 @@ public class WeaponController : MonoBehaviour
     //是否真正射击
     private bool fire;
     //当前子弹数
-    private int bulletLeft = 30;
+    public int bulletLeft = 30;
     //一个弹夹子弹
     private int bulletMag = 30;
     //总子弹
@@ -39,7 +39,6 @@ public class WeaponController : MonoBehaviour
     }
     void Update()
     {
-        UpdateAmmoUI();
         //重置开火状态
         fire = false;
         //换弹
@@ -82,11 +81,11 @@ public class WeaponController : MonoBehaviour
         //发射射线
          Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range);
 
-        if(hit.collider.gameObject.tag == "Enemy")
+        /*if(hit.collider.gameObject.tag == "Enemy")
         {
             hit.collider.gameObject.GetComponent<EnemyHealth>().Damage(20f);
            
-        } 
+        }*/
         
         fireTimer = 0;
         bulletLeft--;
@@ -107,11 +106,5 @@ public class WeaponController : MonoBehaviour
             bulletTotal = 0;
             bulletLeft += bulletTotal;
         }
-    }
-
-    //子弹UI
-    void UpdateAmmoUI()
-    {
-        AmmoTextUI.text = bulletLeft + "/" + bulletTotal;
     }
 }

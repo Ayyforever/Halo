@@ -39,8 +39,7 @@ public class WeaponController : MonoBehaviour
     }
     void Update()
     {
-        //重置开火状态
-        fire = false;
+        
         //换弹
         if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag) 
         {
@@ -50,8 +49,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             fire = Shoot();
-            //播放射击动画
-            animator.SetBool("shooting", fire);
+            
         }
         
         fireTimer += Time.deltaTime;
@@ -78,14 +76,16 @@ public class WeaponController : MonoBehaviour
         }
         //击中点
         RaycastHit hit;
+        //播放动画
+        animator.CrossFadeInFixedTime("Shooting", 0.1f);
         //发射射线
-         Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range);
+        Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range);
 
-        /*if(hit.collider.gameObject.tag == "Enemy")
-        {
-            hit.collider.gameObject.GetComponent<EnemyHealth>().Damage(20f);
+        //if(hit.collider.gameObject.tag == "Enemy")
+        //{
+        //    hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
            
-        }*/
+        //}
         
         fireTimer = 0;
         bulletLeft--;

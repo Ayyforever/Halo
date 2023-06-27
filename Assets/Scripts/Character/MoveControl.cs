@@ -49,7 +49,11 @@ public class MoveControl : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 move *= runRate;
-                animator.CrossFadeInFixedTime("Running", 0.1f);
+                animator.SetBool("run",true);
+            }
+            else
+            {
+                animator.SetBool("run", false);
             }
             controller.Move(move * Time.deltaTime * playerSpeed);
             return true;

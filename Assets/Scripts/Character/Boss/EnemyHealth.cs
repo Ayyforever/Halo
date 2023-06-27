@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeHeealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-    public float hp = 100f;
+    public float hp = 1000f;
     public Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,6 @@ public class MeleeHeealth : MonoBehaviour
     void Die()
     {
         animator.SetTrigger("die");
-        Destroy(gameObject, 3f);
+        Destroy(gameObject,2f);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyLogic : MonoBehaviour
+public class BossLogic : MonoBehaviour
 {
     public NavMeshAgent agent;
 
@@ -22,7 +22,7 @@ public class EnemyLogic : MonoBehaviour
     private float maxDeviationAngle = 20f; // ×î´óÆ«Àë½Ç¶È
 
     private float n = 0;
-    private float m = 0;
+
 
 
     private Transform player;

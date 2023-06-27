@@ -10,7 +10,7 @@ public class MeleeLogic : MonoBehaviour
 
     public float warnRange = 25f;
     public float chaseRange = 20f;
-    public float attackRange = 1f;
+    public float attackRange = 3f;
 
 
     private Transform player;
@@ -32,18 +32,19 @@ public class MeleeLogic : MonoBehaviour
         {
             //¾¯¾õ¶¯»­
             animator.SetBool("warn", true);
-            if (distance <= chaseRange)
+            if (distance <= chaseRange && distance > attackRange)
             {
                 Chase();
-                if(distance <= attackRange)
-                {
-                    Attack();
-                }
-                else
-                {
-                    animator.SetBool("attack", false);
-                }
             }
+            if (distance <= attackRange)
+            {
+                Attack();
+            }
+            else
+            {
+                animator.SetBool("attack", false);
+            }
+            
         }
         else
         {
@@ -53,12 +54,14 @@ public class MeleeLogic : MonoBehaviour
 
     void Chase()
     {
-        animator.SetTrigger("chase");
+        agent.isStopped = false;
+        animator.SetBool("chase", true);
         agent.SetDestination(player.position);
     }
 
     void Attack()
     {
+        agent.isStopped = true;
         animator.SetBool("attack", true);
     }
 }

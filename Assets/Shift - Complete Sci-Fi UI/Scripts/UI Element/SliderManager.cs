@@ -48,13 +48,22 @@ namespace Michsky.UI.Shift
 
         void Update()
         {
+            //Transform target = transform.Find("Player/摄像机/Weapon/MainWp");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Camera camera = player.GetComponentInChildren<Camera>();
+            GameObject weapon = camera.transform.Find("Weapon").gameObject;
+            GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
+            WeaponController weaponController = mainWp.GetComponent<WeaponController>();
+
+
+
             if (useRoundValue == true)
             {
                 if (usePercent == true)
                     valueText.text = Mathf.Round(mainSlider.value * 1.0f).ToString() + "%";
 
                 else
-                    valueText.text = Mathf.Round(mainSlider.value * 1.0f).ToString() + " / 30";
+                    valueText.text = Mathf.Round(mainSlider.value * 1.0f).ToString() + " / " + (weaponController.bulletTotal).ToString();
             }
 
             else

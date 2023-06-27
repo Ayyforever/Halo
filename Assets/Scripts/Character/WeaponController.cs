@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
+
 
 public class WeaponController : MonoBehaviour
 {
@@ -21,21 +22,20 @@ public class WeaponController : MonoBehaviour
     //当前子弹数
     public int bulletLeft = 30;
     //一个弹夹子弹
-    private int bulletMag = 30;
+    public int bulletMag = 30;
     //总子弹
-    private int bulletTotal = 210;
+    public int bulletTotal = 210;
 
     public Animator animator;
 
-    
-    public TextMeshProUGUI AmmoTextUI;
+    public ParticleSystem particle;
+
+    public GameObject hitParticle;
 
     private void Start()
     {
-        if(animator == null)
-        {
-            animator = gameObject.GetComponent<Animator>();
-        }
+           animator = gameObject.GetComponent<Animator>();
+        
     }
     void Update()
     {
@@ -78,14 +78,20 @@ public class WeaponController : MonoBehaviour
         RaycastHit hit;
         //播放动画
         animator.CrossFadeInFixedTime("Shooting", 0.1f);
-        //发射射线
-        Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range);
 
-        //if(hit.collider.gameObject.tag == "Enemy")
-        //{
-        //    hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
-           
-        //}
+        //开火效果
+        particle.Play();
+        //发射射线
+        if (Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range))
+        {
+            GameObject hitParticleOb = Instantiate(hitParticle, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            if (hit.collider.gameObject.tag == "Enemy")
+            {
+                hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
+            }
+
+            Destroy(hitParticleOb, 0.2f);
+        }
         
         fireTimer = 0;
         bulletLeft--;

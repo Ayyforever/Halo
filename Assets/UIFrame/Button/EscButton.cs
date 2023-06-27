@@ -17,10 +17,8 @@ public class EscButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameRoot.GetInstance().UIManager_Root.stack_ui.Peek().uiType.Name != "SettingsPanel")
         {
-            //GameRoot.GetInstance().UIManager_Root.Pop(false);
+            Cursor.lockState = CursorLockMode.Confined;
             GameRoot.GetInstance().UIManager_Root.Push(new SettingsPanel());
-            transform.SetSiblingIndex(0);
-            //GameRoot.GetInstance().UIManager_Root.Push(new SettingsPanel());
         }
     }
 }

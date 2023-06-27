@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 namespace Michsky.UI.Shift
 {
-    public class SliderManager : MonoBehaviour
+    public class HPManager : MonoBehaviour
     {
         [Header("TEXTS")]
         public TextMeshProUGUI valueText;
@@ -54,7 +54,7 @@ namespace Michsky.UI.Shift
                     valueText.text = Mathf.Round(mainSlider.value * 1.0f).ToString() + "%";
 
                 else
-                    valueText.text = Mathf.Round(mainSlider.value * 1.0f).ToString() + " / 30";
+                    valueText.text = Mathf.Round(mainSlider.value * 1.0f).ToString() + " / 100";
             }
 
             else

@@ -30,7 +30,10 @@ public class WeaponController : MonoBehaviour
 
     public ParticleSystem particle;
 
+    public GameObject flashLight;
     public GameObject hitParticle;
+    public GameObject hitSmoke;
+    public GameObject hitVestige;
 
     private void Start()
     {
@@ -81,15 +84,19 @@ public class WeaponController : MonoBehaviour
 
         //开火效果
         particle.Play();
+        flashLight.SetActive(true);
         //发射射线
         if (Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range))
         {
             GameObject hitParticleOb = Instantiate(hitParticle, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            GameObject hitSmokeOb = Instantiate(hitSmoke, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            GameObject hitVestigeOb = Instantiate(hitVestige, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
             }
-
+            Destroy(hitVestigeOb, 5.0f);
+            Destroy(hitSmokeOb, 1.0f);
             Destroy(hitParticleOb, 0.2f);
         }
         

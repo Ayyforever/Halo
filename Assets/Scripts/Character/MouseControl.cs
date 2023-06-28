@@ -29,18 +29,22 @@ public class MouseControl : MonoBehaviour
 
     void Player_MouseControl()
     {
-        float xMouse = Input.GetAxis("Mouse X") * Mouse_Speed * Time.deltaTime;
-        float yMOuse = Input.GetAxis("Mouse Y") * Mouse_Speed * Time.deltaTime;
+        if (!InventorySystem.Instance.isOpen)
+        {
+            float xMouse = Input.GetAxis("Mouse X") * Mouse_Speed * Time.deltaTime;
+            float yMOuse = Input.GetAxis("Mouse Y") * Mouse_Speed * Time.deltaTime;
 
-        //player rotate horizontal
-        Player_Object.Rotate(Vector3.up * xMouse);
+            //player rotate horizontal
+            Player_Object.Rotate(Vector3.up * xMouse);
 
 
-        //camera rotate vertical
-        PlayerRotation_Y -= yMOuse;
-        PlayerRotation_Y = Mathf.Clamp(PlayerRotation_Y, -85f, 85f);
-        Quaternion quaternion = Quaternion.Euler(PlayerRotation_Y, 0, 0);
-        Player_Camera.localRotation = quaternion;
+            //camera rotate vertical
+            PlayerRotation_Y -= yMOuse;
+            PlayerRotation_Y = Mathf.Clamp(PlayerRotation_Y, -85f, 85f);
+            Quaternion quaternion = Quaternion.Euler(PlayerRotation_Y, 0, 0);
+            Player_Camera.localRotation = quaternion;
+        }
+        
     }
 
 }

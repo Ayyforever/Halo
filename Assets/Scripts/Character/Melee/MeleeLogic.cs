@@ -8,16 +8,9 @@ public class MeleeLogic : MonoBehaviour
     public NavMeshAgent agent;
     public Animator animator;
 
-    public float warnRange = 50f;
-    public float chaseRange = 40f;
-    public float attackRange = 8f;
-
-    //攻击角度
-    public float attackAngle = 60f;
-    //攻击计时
-    public float attackTimer = 3f;
-    //攻击间隔
-    public float timer = 3f;
+    public float warnRange = 25f;
+    public float chaseRange = 20f;
+    public float attackRange = 3f;
 
 
     private Transform player;
@@ -45,16 +38,7 @@ public class MeleeLogic : MonoBehaviour
             }
             if (distance <= attackRange)
             {
-                if(attackTimer < timer)
-                {
-                    attackTimer += Time.deltaTime;
-                }
-                else
-                {
-                    //协程
-                    StartCoroutine(Attack());
-                    attackTimer = 0f;
-                }
+                Attack();
             }
             else
             {
@@ -75,22 +59,9 @@ public class MeleeLogic : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
-    private IEnumerator Attack()
+    void Attack()
     {
         agent.isStopped = true;
-        animator.SetTrigger("attackTri");
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        //攻击判定
-        {
-            Vector3 direction = (player.position - transform.position).normalized;
-            float angle = Vector3.Angle(transform.forward, direction);
-            distance = Vector3.Distance(transform.position, player.position);
-
-            if (angle <= attackAngle && distance <= attackRange)
-            {
-                //对玩家造成8点伤害
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
-            }
-        }
+        animator.SetBool("attack", true);
     }
 }

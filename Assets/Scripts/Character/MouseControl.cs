@@ -29,8 +29,8 @@ public class MouseControl : MonoBehaviour
 
     void Player_MouseControl()
     {
-        float xMouse = Input.GetAxis("Mouse X") * Mouse_Speed * Time.deltaTime;
-        float yMOuse = Input.GetAxis("Mouse Y") * Mouse_Speed * Time.deltaTime;
+        float xMouse = Input.GetAxis("Mouse X") * Mouse_Speed * 0.0167f;
+        float yMOuse = Input.GetAxis("Mouse Y") * Mouse_Speed * 0.0167f;
 
         //player rotate horizontal
         Player_Object.Rotate(Vector3.up * xMouse);

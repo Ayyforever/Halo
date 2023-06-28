@@ -7,8 +7,8 @@ public class MoveControl : MonoBehaviour
     public CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    [Range(10f,50f)]
-    public float playerSpeed = 30.0f;
+    [Range(1f,25f)]
+    public float playerSpeed = 5.0f;
 
     //跳跃等待
     private bool jumpWait;
@@ -40,9 +40,16 @@ public class MoveControl : MonoBehaviour
     }
 
     //地面移动
-    bool GMove()
+    public bool GMove()
     {
-        Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+        float xMove = Input.GetAxis("Horizontal");
+        float yMove = Input.GetAxis("Vertical");
+        if(xMove != 0.0f && yMove != 0.0f)
+        {
+            xMove /= Mathf.Sqrt(2);
+            yMove /= Mathf.Sqrt(2);
+        }
+        Vector3 move = transform.right * xMove + transform.forward * yMove;
         
         if (move != Vector3.zero)
         {
@@ -72,7 +79,6 @@ public class MoveControl : MonoBehaviour
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 jumpWait = false;
-
             }
             else
             {

@@ -30,6 +30,7 @@ public class WeaponController : MonoBehaviour
 
     public ParticleSystem particle;
 
+    public GameObject hitEffect;
     public GameObject flashLight;
     public GameObject hitParticle;
     public GameObject hitSmoke;
@@ -38,7 +39,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
            animator = gameObject.GetComponent<Animator>();
-        
+        hitEffect.SetActive(false);
     }
     void Update()
     {
@@ -88,9 +89,11 @@ public class WeaponController : MonoBehaviour
         //∑¢…‰…‰œﬂ
         if (Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range))
         {
+            hitEffect.SetActive(true);
             GameObject hitParticleOb = Instantiate(hitParticle, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             GameObject hitSmokeOb = Instantiate(hitSmoke, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             GameObject hitVestigeOb = Instantiate(hitVestige, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            hitEffect.SetActive(false);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);

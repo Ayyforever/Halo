@@ -44,12 +44,12 @@ public class WeaponController : MonoBehaviour
     {
         
         //»»µ¯
-        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag &&!InventorySystem.Instance.isOpen) 
+        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag) 
         {
             Reload();
         }
         //Éä»÷
-        if (Input.GetMouseButton(0)&&!InventorySystem.Instance.isOpen)
+        if (Input.GetMouseButton(0))
         {
             fire = Shoot();
             

@@ -16028,7 +16028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  animator: {fileID: 0}
+  animator: {fileID: 505339590}
 --- !u!195 &505339588
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -16063,7 +16063,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -16102,6 +16102,26 @@ CapsuleCollider:
   m_Height: 3.2
   m_Direction: 1
   m_Center: {x: 0, y: 1.7, z: 0.5}
+--- !u!114 &505339592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505339585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1406fb6669c6e640a7cd5b9999988ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 505339588}
+  animator: {fileID: 505339590}
+  warnRange: 50
+  chaseRange: 40
+  attackRange: 8
+  attackAngle: 60
+  attackTimer: 3
+  timer: 3
 --- !u!1001 &505826730
 PrefabInstance:
   m_ObjectHideFlags: 0

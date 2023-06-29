@@ -19,9 +19,15 @@ public class MeleeLogic : MonoBehaviour
     //攻击间隔
     public float timer = 3f;
 
+    public MouseControl mouseControl;
 
     private Transform player;
     private float distance;
+    // 击打玩家音频
+    private AudioSource audioSource;
+    public AudioClip[] HitSound = new AudioClip[1];
+    // 玩家受伤后视角上扬
+    private float damageTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +35,7 @@ public class MeleeLogic : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +73,13 @@ public class MeleeLogic : MonoBehaviour
         {
             animator.SetBool("warn", false);
         }
+        if(damageTime != 0.0f && damageTime < 0.2f)
+        {
+            damageTime += Time.deltaTime;
+            float yMouse = 2.0f * Mathf.Cos(15.7f * damageTime);
+            mouseControl.GetDamage(yMouse);
+        }
+        if(damageTime >= 0.2f) { damageTime = 0.0f; }
     }
 
     void Chase()
@@ -79,7 +93,7 @@ public class MeleeLogic : MonoBehaviour
     {
         agent.isStopped = true;
         animator.SetTrigger("attackTri");
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        yield return new WaitForSeconds(0.6f/*animator.GetCurrentAnimatorClipInfo(0)[0].clip.length*/);
         //攻击判定
         {
             Vector3 direction = (player.position - transform.position).normalized;
@@ -90,7 +104,15 @@ public class MeleeLogic : MonoBehaviour
             {
                 //对玩家造成8点伤害
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
+                damageTime = Time.deltaTime;
+                PlayHitSound();
             }
         }
+    }
+    void PlayHitSound()
+    {
+        int randomInt = Random.Range(0, HitSound.Length);
+        audioSource.clip = HitSound[randomInt];
+        audioSource.Play();
     }
 }

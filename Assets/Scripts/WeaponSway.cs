@@ -8,6 +8,7 @@ public class WeaponSway : MonoBehaviour
     public float maxExtent; // 幅度的最大值
     public float offset; // 平滑摇摆
     public MoveControl moveControl;
+    public MouseControl mouseControl;
     private float time;
     // 静止
     public float maxStandY;
@@ -19,6 +20,11 @@ public class WeaponSway : MonoBehaviour
     public float maxMoveY;
     private float moveSwayY;
     public float moveSwayOffset;
+    // 后座力
+    public float recoilSwayX;
+    public float recoilSwayY;
+    public float recoilSwayZ;
+    public float recoilSwayOffset;
 
     [SerializeField]private Vector3 originalArm; // 手臂的初始位置
 
@@ -76,5 +82,13 @@ public class WeaponSway : MonoBehaviour
 
         // 变化
         transform.localPosition = Vector3.Lerp(transform.localPosition, originalArm - move, Time.deltaTime * offset);
+    }
+    public void Recoil()
+    {
+        Vector3 move = new Vector3(recoilSwayX, -recoilSwayY, -recoilSwayZ);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, originalArm + move, recoilSwayOffset);
+        float xMouse = Random.Range(-1f, 1f);
+        float yMouse = Random.Range(0.5f, 2f);
+        mouseControl.Recoil_MouseControl(xMouse, yMouse);
     }
 }

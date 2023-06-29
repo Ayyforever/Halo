@@ -14,7 +14,7 @@ public class WeaponController : MonoBehaviour
     //射击范围
     public float range = 100f;
     //射击速度
-    private float fireRate = 0.25f;
+    private float fireRate = 0.1f;
     //射击计时
     private float fireTimer = 0;
     //是否真正射击
@@ -25,63 +25,92 @@ public class WeaponController : MonoBehaviour
     public int bulletMag = 30;
     //总子弹
     public int bulletTotal = 210;
+    // 换弹
+    public float maxReloadTime;
+    private float reloadTime = 0.0f;
+    private bool[] reloadSound = new bool[3];
+    public MouseControl mouseControl;
+    //后座力
+    public WeaponSway weaponSway;
 
     public Animator animator;
 
+    // 开火特效
     public ParticleSystem particle;
 
+    // 击中特效
     public GameObject hitEffect;
     public GameObject flashLight;
     public GameObject hitParticle;
     public GameObject hitSmoke;
     public GameObject hitVestige;
 
+    // 音效
+    private AudioSource audioSource;
+    public AudioClip[] WeaponSound = new AudioClip[5];
+    public AudioClip[] ReloadSound = new AudioClip[3];
+    public AudioClip[] NoBulletSound = new AudioClip[3];
+
     private void Start()
     {
-           animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
         hitEffect.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
+        for (int i = 0; i < reloadSound.Length; i++) { reloadSound[i] = true; }
     }
     void Update()
     {
-        
         //换弹
-        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag) 
+        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag && bulletTotal != 0) 
+        {
+            animator.SetTrigger("reload");
+            reloadTime = Time.deltaTime;
+        }
+        if(reloadTime != 0.0f)
         {
             Reload();
         }
         //射击
-        if (Input.GetMouseButton(0))
+        else if(Input.GetMouseButton(0))
         {
             fire = Shoot();
-            
         }
-        
         fireTimer += Time.deltaTime;
     }
      bool Shoot()
     {
         //射击条件判定
         //检测是否在换弹
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Reload"))
-        {
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
-            {
-                return false;
-            }
-        }
+        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("Reload"))
+        //{
+        //    if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        //    {
+        //        return false;
+        //    }
+        //}
         if (fireTimer < fireRate )
         {
             return false;
         }
-        if(bulletLeft <= 0)
+        if(bulletLeft <= 0 && bulletTotal != 0)
         {
-            Reload();
+            animator.SetTrigger("reload");
+            reloadTime = Time.deltaTime;
             return false;
         }
+        else if(bulletLeft <= 0)
+        {
+            PlayNoBulletSound();
+            fireTimer = 0.0f;
+            return false;
+        }
+        
         //击中点
         RaycastHit hit;
-        //播放动画
-        animator.CrossFadeInFixedTime("Shooting", 0.1f);
+        // 后座力
+        weaponSway.Recoil();
+        // 播放音效
+        PlayShootSound();
 
         //开火效果
         particle.Play();
@@ -102,25 +131,76 @@ public class WeaponController : MonoBehaviour
             Destroy(hitSmokeOb, 1.0f);
             Destroy(hitParticleOb, 0.2f);
         }
-        
+
         fireTimer = 0;
         bulletLeft--;
         return true;
     }
-
     //换弹
     void Reload()
     {
-        animator.SetTrigger("reload");
-        if(bulletTotal >= bulletMag - bulletLeft)
+        reloadTime += Time.deltaTime;
+        if(reloadTime >= maxReloadTime / 6 && reloadTime < maxReloadTime / 2 && reloadSound[0])
         {
-            bulletTotal -= (bulletMag - bulletLeft);
-            bulletLeft = bulletMag;
+            PlayReloadSound(0);
+            reloadSound[0] = false;
         }
-        else
+        else if (reloadTime >= maxReloadTime / 4 && reloadTime < 3 * maxReloadTime / 8)
         {
-            bulletTotal = 0;
-            bulletLeft += bulletTotal;
+            float yMouse = 0.5f * Mathf.Cos(25.12f * (reloadTime - maxReloadTime / 4) / maxReloadTime);
+            mouseControl.Reload_MouseControl(yMouse);
         }
+        else if(reloadTime >= maxReloadTime / 2 && reloadTime < 17 * maxReloadTime / 24 && reloadSound[1])
+        {
+            PlayReloadSound(1);
+            reloadSound[1] = false;
+        }
+        else if (reloadTime >= 7 * maxReloadTime / 12 && reloadTime < 17 * maxReloadTime / 24)
+        {
+            float yMouse = -0.3f * Mathf.Cos(25.12f * (reloadTime - 7 * maxReloadTime / 12) / maxReloadTime);
+            mouseControl.Reload_MouseControl(yMouse);
+        }
+        else if (reloadTime >= 17 * maxReloadTime / 24 && reloadTime < maxReloadTime && reloadSound[2])
+        {
+            PlayReloadSound(2);
+            reloadSound[2] = false;
+        }
+        else if (reloadTime >= 18 * maxReloadTime / 24 && reloadTime < maxReloadTime)
+        {
+            float yMouse = -0.3f * Mathf.Cos(15.7f * (reloadTime - 17 * maxReloadTime / 24) / maxReloadTime);
+            mouseControl.Reload_MouseControl(yMouse);
+        }
+        else if(reloadTime >= maxReloadTime)
+        {
+            if (bulletTotal >= bulletMag - bulletLeft)
+            {
+                bulletTotal -= (bulletMag - bulletLeft);
+                bulletLeft = bulletMag;
+            }
+            else
+            {
+                bulletLeft += bulletTotal;
+                bulletTotal = 0;
+            }
+            reloadTime = 0.0f;
+            for(int i = 0; i < reloadSound.Length; i++) { reloadSound[i] = true; }
+        }
+    }
+    void PlayNoBulletSound()
+    {
+        int randomInt = Random.Range(0, NoBulletSound.Length);
+        audioSource.clip = NoBulletSound[randomInt];
+        audioSource.Play();
+    }
+    void PlayShootSound()
+    {
+        int randomInt = Random.Range(0, WeaponSound.Length);
+        audioSource.clip = WeaponSound[randomInt];
+        audioSource.Play();
+    }
+    void PlayReloadSound(int n)
+    {
+        audioSource.clip = ReloadSound[n];
+        audioSource.Play();
     }
 }

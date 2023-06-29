@@ -15,14 +15,15 @@ public class MoveControl : MonoBehaviour
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
 
+    private float footSoundWait = 0.0f;
+    private float maxFootSoundWait = 1.0f;
     public float runRate = 1.3f;
 
     public Animator animator;
 
     [Header("…˘“Ù…Ë÷√")]
     private AudioSource audioSource;
-    public AudioClip walkingSound;
-    public AudioClip runingSound;
+    public AudioClip[] walkingSound = new AudioClip[5];
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class MoveControl : MonoBehaviour
     //µÿ√Ê“∆∂Ø
     public bool GMove()
     {
+        //if (!groundedPlayer) { return false; }
         float xMove = Input.GetAxis("Horizontal");
         float yMove = Input.GetAxis("Vertical");
         if(xMove != 0.0f && yMove != 0.0f)
@@ -53,23 +55,43 @@ public class MoveControl : MonoBehaviour
         
         if (move != Vector3.zero)
         {
+            if (footSoundWait < maxFootSoundWait)
+            {
+                footSoundWait += Time.deltaTime;
+            }
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 move *= runRate;
+                maxFootSoundWait = 0.5f;
                 animator.SetBool("run",true);
             }
             else
             {
+                maxFootSoundWait = 1.0f;
                 animator.SetBool("run", false);
             }
             controller.Move(move * Time.deltaTime * playerSpeed);
+            // ≤•∑≈Ω≈≤Ω…˘
+            if (footSoundWait >= maxFootSoundWait)
+            {
+                MoveSoundPlay();
+                footSoundWait = 0.0f;
+            }
             return true;
         }
         else
+        {
+            footSoundWait = 0.0f;
             return false;
+        }
     }
 
-
+    void MoveSoundPlay()
+    {
+        int n = Random.Range(0, walkingSound.Length);
+        audioSource.clip = walkingSound[n];
+        audioSource.Play();
+    }
     //Ã¯‘æ≈–∂œ
     void Jump()
     {

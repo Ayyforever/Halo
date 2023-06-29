@@ -13,13 +13,16 @@ public class BossLogic : MonoBehaviour
     //脱战距离
     public float escapeRange = 120f;
 
+
+    //攻击频率
+    public float attackTimer = 3f;
     //攻击伤害
-    public float damage = 0f;
+    public float damage = 10f;
 
 
     public Animator animator;
 
-    private float maxDeviationAngle = 20f; // 最大偏离角度
+    private float maxDeviationAngle = 0f; // 最大偏离角度
 
     private float n = 0;
 
@@ -28,6 +31,11 @@ public class BossLogic : MonoBehaviour
     private Transform player;
     private Transform body;
     private float distance;
+
+    public LineRenderer SmallCanon01L;
+    public LineRenderer SmallCanon01R;
+    public LineRenderer SmallCanon02L;
+    public LineRenderer SmallCanon02R;
 
 
     // Start is called before the first frame update
@@ -55,6 +63,7 @@ public class BossLogic : MonoBehaviour
             {
                 agent.isStopped = true;
                 animator.SetBool("active", false);
+                attackTimer += Time.deltaTime;
                 Attack();
             }
         }
@@ -64,7 +73,7 @@ public class BossLogic : MonoBehaviour
         }
 
 
-
+        
     }
 
     void Active()
@@ -76,21 +85,26 @@ public class BossLogic : MonoBehaviour
     }
     void Attack()
     {
+        if(attackTimer < 3f)
+        {
+            return;
+        }
+        
         gameObject.transform.LookAt(player.position);
         // 计算射击方向
         Vector3 targetDirection = player.position - body.position;
         Quaternion desiredRotation = Quaternion.LookRotation(targetDirection);
 
-        // 计算偏离角度
-        float deviationAngle = Random.Range(-maxDeviationAngle, maxDeviationAngle);
-        Quaternion deviationRotation = Quaternion.Euler(0f, deviationAngle, 0f);
+       // 计算偏离角度
+       // float deviationAngle = Random.Range(-maxDeviationAngle, maxDeviationAngle);
+       // Quaternion deviationRotation = Quaternion.Euler(0f, deviationAngle, 0f);
 
-        // 应用偏离角度
-        Quaternion finalRotation = desiredRotation * deviationRotation;
-        Vector3 shootingDirection = finalRotation * Vector3.forward;
+       // 应用偏离角度
+       //Quaternion finalRotation = desiredRotation * deviationRotation;
+       // Vector3 shootingDirection = finalRotation * Vector3.forward;
 
         // 发射射线进行攻击检测
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(transform.position, targetDirection);
         RaycastHit hit;
         
 
@@ -105,6 +119,7 @@ public class BossLogic : MonoBehaviour
 
         }
 
+        attackTimer = 0f;
 
     }
 }

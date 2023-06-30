@@ -52,7 +52,7 @@ public class Logic : MonoBehaviour
         {
             if (attackTimer >= timer)
             {
-                StartCoroutine(Attack());
+                Attack();
             }
             else
             {
@@ -74,22 +74,21 @@ public class Logic : MonoBehaviour
     }
 
 
-    IEnumerator Attack()
+    void Attack()
     {
         agent.isStopped = true;
         //停下行走动画
         animator.SetBool("chase", false);
-        ClawActive();
         //播放攻击动画
         animator.SetTrigger("attack");
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        ClawDown();
+        //yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
 
         attackTimer = 0f;
     }
 
     void ClawActive()
     {
+        
         claw1.SetActive(true);
         claw2.SetActive(true);
     }
@@ -98,5 +97,6 @@ public class Logic : MonoBehaviour
     {
         claw1.SetActive(false);
         claw2.SetActive(false);
+        
     }
 }

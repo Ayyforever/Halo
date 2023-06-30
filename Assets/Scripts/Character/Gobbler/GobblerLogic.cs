@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using  UnityEngine.AI;
+using UnityEngine.AI;
 
-public class CeratoLogic : MonoBehaviour
+public class GobblerLogic : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Animator animator;
@@ -12,17 +12,17 @@ public class CeratoLogic : MonoBehaviour
     public float chaseRange = 40f;
     public float attackRange = 8f;
 
-    //roar¹¥»÷¼ä¸ô
-    public int n = 3;
+    
+    public int endRoll = 3;
     //roarÉËº¦
-    public float roarDamage = 3f;
+  
     //¹¥»÷¼ÆÊ±
     private float attackTimer;
 
     //¹¥»÷¼ä¸ô
     public float timer = 4f;
 
-    public GameObject claw1;
+    public GameObject collider;
     //public GameObject claw2;
     private Transform player;
     private float distance;
@@ -55,16 +55,7 @@ public class CeratoLogic : MonoBehaviour
         {
             if (attackTimer >= timer)
             {
-                if (n >= 0)
-                {
-                    Attack();
-
-                }
-                else
-                {
-                    //roar¹¥»÷°Ù·Ö°ÙµôÑª
-                    Roar();
-                }
+                Attack();
             }
             else
             {
@@ -74,6 +65,10 @@ public class CeratoLogic : MonoBehaviour
         else
         {
             Chase();
+        }
+        if(endRoll <=0 )
+        {
+            animator.SetTrigger("endRoll");
         }
     }
 
@@ -91,35 +86,24 @@ public class CeratoLogic : MonoBehaviour
         agent.isStopped = true;
         //Í£ÏÂÐÐ×ß¶¯»­
         animator.SetBool("chase", false);
-        
-        //²¥·Å¹¥»÷¶¯»­
+
+        endRoll = 5;
+
         animator.SetTrigger("attack");
-
-        attackTimer = 0f;
         
-    }
-
-
-    void Roar()
-    {
-        agent.isStopped = true;
-        animator.SetBool("chase", false);
-        animator.SetTrigger("roar");
-        //È«ÆÁ¹¥»÷Ö±½Ó¿ÛÑª
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(roarDamage);
-        n = 2;
-
         attackTimer = 0f;
-    }
-    void ClawActive()
-    {
-        claw1.SetActive(true);
+
     }
 
-    void ClawDown()
+    void StartRoll()
     {
-        claw1.SetActive(false);
-        Debug.Log(n);
-        n--;
+        collider.SetActive(true);
     }
+
+    void EndRoll()
+    {
+        collider.SetActive(false);
+        endRoll -= 1;
+    }
+
 }

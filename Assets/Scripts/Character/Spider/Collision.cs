@@ -15,14 +15,16 @@ public class Collision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("name"+other.name);
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerHealth>().Damage(damage);
+            Debug.Log("hurt");
         }
     }
 }

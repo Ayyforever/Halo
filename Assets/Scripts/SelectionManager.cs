@@ -11,6 +11,8 @@ public class SelectionManager : MonoBehaviour
     //是否指向物体
     public bool onTarget;
 
+    public GameObject selectedObject;
+
     //物体信息文本
     public GameObject interaction_Info_UI;
     Text interaction_text;
@@ -46,7 +48,7 @@ public class SelectionManager : MonoBehaviour
             if (interactable && interactable.playerInRange)
             {
                 onTarget = true;
-
+                selectedObject = interactable.gameObject;
                 interaction_text.text = interactable.GetItemName();
                 interaction_Info_UI.SetActive(true);
 

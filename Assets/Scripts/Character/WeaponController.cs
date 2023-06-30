@@ -25,18 +25,23 @@ public class WeaponController : MonoBehaviour
     public int bulletMag = 30;
     //总子弹
     public int bulletTotal = 210;
-    // 换弹
+    [Header("换弹")]
     public float maxReloadTime;
     private float reloadTime = 0.0f;
     private bool[] reloadSound = new bool[3];
     public MouseControl mouseControl;
-    //后座力
+    [Header("后座力")]
     public WeaponSway weaponSway;
 
     public Animator animator;
 
-    // 开火特效
+    [Header("开火特效")]
     public ParticleSystem particle;
+
+    // 子弹预制体
+    public GameObject bulletPrefab;
+    public GameObject bulletFolder;
+    public GameObject firePoint;
 
     // 击中特效
     public GameObject hitEffect;
@@ -44,9 +49,10 @@ public class WeaponController : MonoBehaviour
     public GameObject hitParticle;
     public GameObject hitSmoke;
     public GameObject hitVestige;
+    public GameObject hitBlood;
 
     // 音效
-    private AudioSource audioSource;
+    public AudioSource[] audioSource = new AudioSource[2];
     public AudioClip[] WeaponSound = new AudioClip[5];
     public AudioClip[] ReloadSound = new AudioClip[3];
     public AudioClip[] NoBulletSound = new AudioClip[3];
@@ -55,13 +61,14 @@ public class WeaponController : MonoBehaviour
     {
         animator = gameObject.GetComponent<Animator>();
         hitEffect.SetActive(false);
-        audioSource = GetComponent<AudioSource>();
         for (int i = 0; i < reloadSound.Length; i++) { reloadSound[i] = true; }
     }
     void Update()
     {
         //换弹
-        if (Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag && bulletTotal != 0) 
+        bool A = Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag;
+        bool B = bulletLeft == 0;
+        if ((A || B) && bulletTotal != 0 && reloadTime == 0.0f) 
         {
             animator.SetTrigger("reload");
             reloadTime = Time.deltaTime;
@@ -94,14 +101,12 @@ public class WeaponController : MonoBehaviour
         }
         if(bulletLeft <= 0 && bulletTotal != 0)
         {
-            animator.SetTrigger("reload");
-            reloadTime = Time.deltaTime;
             return false;
         }
-        else if(bulletLeft <= 0)
+        else if(bulletLeft == 0)
         {
             PlayNoBulletSound();
-            fireTimer = 0.0f;
+            fireTimer = -0.2f;
             return false;
         }
         
@@ -110,26 +115,33 @@ public class WeaponController : MonoBehaviour
         // 后座力
         weaponSway.Recoil();
         // 播放音效
-        PlayShootSound();
+        PlayShootSound(bulletLeft);
 
         //开火效果
         particle.Play();
         flashLight.SetActive(true);
+        // 发射子弹
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation, bulletFolder.transform);
         //发射射线
         if (Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range))
         {
             hitEffect.SetActive(true);
             GameObject hitParticleOb = Instantiate(hitParticle, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             GameObject hitSmokeOb = Instantiate(hitSmoke, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
-            GameObject hitVestigeOb = Instantiate(hitVestige, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
-            hitEffect.SetActive(false);
+            Destroy(hitParticleOb, 0.2f);
+            Destroy(hitSmokeOb, 1.0f);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
+                GameObject hitBloodOb = Instantiate(hitBlood, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                Destroy(hitBloodOb, 0.5f);
             }
-            Destroy(hitVestigeOb, 5.0f);
-            Destroy(hitSmokeOb, 1.0f);
-            Destroy(hitParticleOb, 0.2f);
+            else
+            {
+                GameObject hitVestigeOb = Instantiate(hitVestige, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                Destroy(hitVestigeOb, 5.0f);
+            }
+            hitEffect.SetActive(false);
         }
 
         fireTimer = 0;
@@ -189,18 +201,18 @@ public class WeaponController : MonoBehaviour
     void PlayNoBulletSound()
     {
         int randomInt = Random.Range(0, NoBulletSound.Length);
-        audioSource.clip = NoBulletSound[randomInt];
-        audioSource.Play();
+        audioSource[0].clip = NoBulletSound[randomInt];
+        audioSource[0].Play();
     }
-    void PlayShootSound()
+    void PlayShootSound(int bullet)
     {
         int randomInt = Random.Range(0, WeaponSound.Length);
-        audioSource.clip = WeaponSound[randomInt];
-        audioSource.Play();
+        audioSource[bullet % 2].clip = WeaponSound[randomInt];
+        audioSource[bullet % 2].Play();
     }
     void PlayReloadSound(int n)
     {
-        audioSource.clip = ReloadSound[n];
-        audioSource.Play();
+        audioSource[0].clip = ReloadSound[n];
+        audioSource[0].Play();
     }
 }

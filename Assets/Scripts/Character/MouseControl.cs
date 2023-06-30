@@ -66,4 +66,12 @@ public class MouseControl : MonoBehaviour
         Quaternion quaternion = Quaternion.Euler(PlayerRotation_Y, 0, 0);
         Player_Camera.localRotation = quaternion;
     }
+    public void Move_MouseControl(float moveRotateY)
+    {
+        //camera rotate vertical
+        PlayerRotation_Y -= moveRotateY;
+        PlayerRotation_Y = Mathf.Clamp(PlayerRotation_Y, -85f, 85f);
+        Quaternion quaternion = Quaternion.Euler(PlayerRotation_Y, 0, 0);
+        Player_Camera.localRotation = quaternion;
+    }
 }

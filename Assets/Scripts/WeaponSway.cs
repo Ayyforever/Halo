@@ -12,13 +12,10 @@ public class WeaponSway : MonoBehaviour
     private float time;
     // ¾²Ö¹
     public float maxStandY;
-    private float standSwayY;
     public float standSwayOffset;
-    public float maxMoveX;
     // ÒÆ¶¯
-    private float moveSwayX;
+    public float maxMoveX;
     public float maxMoveY;
-    private float moveSwayY;
     public float moveSwayOffset;
     // ºó×ùÁ¦
     public float recoilSwayX;
@@ -47,8 +44,8 @@ public class WeaponSway : MonoBehaviour
         time += Time.deltaTime;
         if (moveControl.GMove())
         {
-            moveSwayX = maxMoveX * Mathf.Sin(time * 6.28f);
-            moveSwayY = -maxMoveY * Mathf.Abs(Mathf.Cos(time * 6.28f));
+            float moveSwayX = maxMoveX * Mathf.Sin(time * 6.28f);
+            float moveSwayY = -maxMoveY * Mathf.Abs(Mathf.Cos(time * 6.28f));
             if(time >= 1.0f)
             {
                 time = 0.0f;
@@ -62,7 +59,7 @@ public class WeaponSway : MonoBehaviour
         }
         else
         {
-            standSwayY = maxStandY * Mathf.Sin(time * 3.14f);
+            float standSwayY = maxStandY * Mathf.Sin(time * 3.14f);
             if (time >= 2.0f)
             {
                 time = 0.0f;

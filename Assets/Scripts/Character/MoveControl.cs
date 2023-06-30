@@ -15,21 +15,27 @@ public class MoveControl : MonoBehaviour
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
 
+    [Header("脚步音频间隔")]
     private float footSoundWait = 0.0f;
     private float maxFootSoundWait = 1.0f;
     public float runRate = 1.3f;
 
+    [Header("走路视角摇晃")]
+    public float maxRotateY;
+    public float moveTime = 0.0f;
+    public MouseControl mouseControl;
+
     public Animator animator;
 
     [Header("声音设置")]
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip[] walkingSound = new AudioClip[5];
 
     private void Start()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
-        audioSource = GetComponent<AudioSource>();
+        
     }
     void Update()
     {
@@ -59,24 +65,37 @@ public class MoveControl : MonoBehaviour
             {
                 footSoundWait += Time.deltaTime;
             }
+            if(moveTime < 1.0f)
+            {
+                moveTime += Time.deltaTime;
+            }
+            float moveRotateY = 0;
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 move *= runRate;
                 maxFootSoundWait = 0.5f;
+
+                moveRotateY = -2f * maxRotateY * Mathf.Sin(moveTime * 12.56f);
+
                 animator.SetBool("run",true);
             }
             else
             {
+                moveRotateY = -maxRotateY * Mathf.Sin(moveTime * 6.28f);
                 maxFootSoundWait = 1.0f;
                 animator.SetBool("run", false);
             }
             controller.Move(move * Time.deltaTime * playerSpeed);
+            mouseControl.Move_MouseControl(moveRotateY);
+            
             // 播放脚步声
             if (footSoundWait >= maxFootSoundWait)
             {
                 MoveSoundPlay();
                 footSoundWait = 0.0f;
             }
+            if(moveTime >= 1.0f) { moveTime = 0.0f; }
+            
             return true;
         }
         else

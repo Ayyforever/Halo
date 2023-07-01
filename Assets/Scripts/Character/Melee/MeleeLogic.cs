@@ -19,9 +19,16 @@ public class MeleeLogic : MonoBehaviour
     //攻击间隔
     public float timer = 3f;
 
-
     private Transform player;
     private float distance;
+    [Header("音频设置")]
+    public AudioSource[] audioSource = new AudioSource[2];
+    [Header("击打玩家")]
+    public AudioClip[] HitSound = new AudioClip[1];
+    [Header("怪物叫声")]
+    public AudioClip[] ScreamSound = new AudioClip[5];
+    private float screamTime = 0.0f;
+    private float maxScreamTime;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +36,19 @@ public class MeleeLogic : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        maxScreamTime = Random.Range(10f, 20f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        screamTime += Time.deltaTime;
+        if(screamTime >= maxScreamTime)
+        {
+            PlayScreamSound();
+            screamTime = 0.0f;
+            maxScreamTime = Random.Range(10f, 20f);
+        }
         distance = Vector3.Distance(transform.position, player.position);
         if (distance <= warnRange)
         {
@@ -79,7 +94,7 @@ public class MeleeLogic : MonoBehaviour
     {
         agent.isStopped = true;
         animator.SetTrigger("attackTri");
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        yield return new WaitForSeconds(0.6f/*animator.GetCurrentAnimatorClipInfo(0)[0].clip.length*/);
         //攻击判定
         {
             Vector3 direction = (player.position - transform.position).normalized;
@@ -90,7 +105,21 @@ public class MeleeLogic : MonoBehaviour
             {
                 //对玩家造成8点伤害
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
+                PlayHitSound();
             }
         }
+    }
+    void PlayScreamSound()
+    {
+        int randomInt = Random.Range(0, ScreamSound.Length);
+        audioSource[1].clip = ScreamSound[randomInt];
+        audioSource[1].spatialBlend = 1f;  // 启用 3D 音频设置
+        audioSource[1].Play();
+    }
+    void PlayHitSound()
+    {
+        int randomInt = Random.Range(0, HitSound.Length);
+        audioSource[0].clip = HitSound[randomInt];
+        audioSource[0].Play();
     }
 }

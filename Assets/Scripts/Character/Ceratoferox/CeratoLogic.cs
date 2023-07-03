@@ -62,7 +62,7 @@ public class CeratoLogic : MonoBehaviour
                 }
                 else
                 {
-                    //roar¹¥»÷°Ù·Ö°ÙµôÑª
+                    //roar¹¥»÷·¶Î§µôÑª
                     Roar();
                 }
             }
@@ -105,8 +105,15 @@ public class CeratoLogic : MonoBehaviour
         agent.isStopped = true;
         animator.SetBool("chase", false);
         animator.SetTrigger("roar");
-        //È«ÆÁ¹¥»÷Ö±½Ó¿ÛÑª
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(roarDamage);
+        //·¶Î§¹¥»÷¿ÛÑª
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 8f);
+        foreach(Collider collider in colliders)
+        {
+            if (collider.GetComponent<PlayerHealth>() != null)
+            {
+                collider.GetComponent<PlayerHealth>().Damage(roarDamage);
+            }
+        }
         n = 2;
 
         attackTimer = 0f;
@@ -119,7 +126,6 @@ public class CeratoLogic : MonoBehaviour
     void ClawDown()
     {
         claw1.SetActive(false);
-        Debug.Log(n);
         n--;
     }
 }

@@ -8,9 +8,9 @@ public class MeleeLogic : MonoBehaviour
     public NavMeshAgent agent;
     public Animator animator;
 
-    public float warnRange = 50f;
-    public float chaseRange = 40f;
-    public float attackRange = 8f;
+    public float warnRange = 30f;
+    public float chaseRange = 20f;
+    public float attackRange = 5f;
 
     //¹¥»÷½Ç¶È
     public float attackAngle = 60f;
@@ -18,6 +18,8 @@ public class MeleeLogic : MonoBehaviour
     public float attackTimer = 3f;
     //¹¥»÷¼ä¸ô
     public float timer = 3f;
+
+    public GameObject collider;
 
     private Transform player;
     private float distance;
@@ -43,7 +45,7 @@ public class MeleeLogic : MonoBehaviour
     void Update()
     {
         screamTime += Time.deltaTime;
-        if(screamTime >= maxScreamTime)
+        if (screamTime >= maxScreamTime)
         {
             PlayScreamSound();
             screamTime = 0.0f;
@@ -67,8 +69,8 @@ public class MeleeLogic : MonoBehaviour
                 else
                 {
                     //Ð­³Ì
-                    StartCoroutine(Attack());
-                    attackTimer = 0f;
+                    Attack();
+                   
                 }
             }
             else
@@ -90,12 +92,12 @@ public class MeleeLogic : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
-    private IEnumerator Attack()
+    void Attack()
     {
         agent.isStopped = true;
         animator.SetTrigger("attackTri");
-        yield return new WaitForSeconds(0.6f/*animator.GetCurrentAnimatorClipInfo(0)[0].clip.length*/);
-        //¹¥»÷ÅÐ¶¨
+        /*
+        //¹¥»÷ÅÐ¶¨             // ÓÉÓÚÅö×²¼ì²â¸üºÏÀí¹Ê¶ªÆú
         {
             Vector3 direction = (player.position - transform.position).normalized;
             float angle = Vector3.Angle(transform.forward, direction);
@@ -107,7 +109,8 @@ public class MeleeLogic : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
                 PlayHitSound();
             }
-        }
+        }*/
+        attackTimer = 0f;
     }
     void PlayScreamSound()
     {
@@ -121,5 +124,16 @@ public class MeleeLogic : MonoBehaviour
         int randomInt = Random.Range(0, HitSound.Length);
         audioSource[0].clip = HitSound[randomInt];
         audioSource[0].Play();
+    }
+
+    //¹¥»÷Åö×²Ìå¼¤»î
+    void Active()
+    {
+        collider.SetActive(true);
+    }
+
+    void InActive()
+    {
+        collider.SetActive(false);
     }
 }

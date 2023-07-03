@@ -20,7 +20,7 @@ public class GobblerLogic : MonoBehaviour
     private float attackTimer;
 
     //攻击间隔
-    public float timer = 4f;
+    public float timer = 8f;
 
     public GameObject collider;
     //public GameObject claw2;
@@ -87,7 +87,7 @@ public class GobblerLogic : MonoBehaviour
         //停下行走动画
         animator.SetBool("chase", false);
 
-        endRoll = 5;
+        endRoll = 3;
 
         animator.SetTrigger("attack");
         

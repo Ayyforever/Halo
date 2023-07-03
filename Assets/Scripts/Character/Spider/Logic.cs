@@ -23,6 +23,10 @@ public class Logic : MonoBehaviour
     public GameObject claw2;
     private Transform player;
     private float distance;
+    [Header("“Ù∆µ…Ë÷√")]
+    public AudioSource audioSource;
+    [Header("π•ª˜")]
+    public AudioClip[] AttackSound = new AudioClip[2];
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +86,10 @@ public class Logic : MonoBehaviour
         //≤•∑≈π•ª˜∂Øª≠
         animator.SetTrigger("attack");
         //yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-
+        int randomInt = Random.Range(0, AttackSound.Length);
+        audioSource.clip = AttackSound[randomInt];
+        audioSource.spatialBlend = 1f;  // ∆Ù”√ 3D “Ù∆µ…Ë÷√
+        audioSource.Play();
         attackTimer = 0f;
     }
 

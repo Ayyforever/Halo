@@ -25,10 +25,8 @@ public class MeleeLogic : MonoBehaviour
     public AudioSource[] audioSource = new AudioSource[2];
     [Header("击打玩家")]
     public AudioClip[] HitSound = new AudioClip[1];
-    [Header("怪物叫声")]
-    public AudioClip[] ScreamSound = new AudioClip[5];
-    private float screamTime = 0.0f;
-    private float maxScreamTime;
+    [Header("攻击声")]
+    public AudioClip[] AttackSound = new AudioClip[2];
 
     // Start is called before the first frame update
     void Start()
@@ -36,19 +34,11 @@ public class MeleeLogic : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        maxScreamTime = Random.Range(10f, 20f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        screamTime += Time.deltaTime;
-        if(screamTime >= maxScreamTime)
-        {
-            PlayScreamSound();
-            screamTime = 0.0f;
-            maxScreamTime = Random.Range(10f, 20f);
-        }
         distance = Vector3.Distance(transform.position, player.position);
         if (distance <= warnRange)
         {
@@ -100,7 +90,7 @@ public class MeleeLogic : MonoBehaviour
             Vector3 direction = (player.position - transform.position).normalized;
             float angle = Vector3.Angle(transform.forward, direction);
             distance = Vector3.Distance(transform.position, player.position);
-
+            PlayAttackSound();
             if (angle <= attackAngle && distance <= attackRange)
             {
                 //对玩家造成8点伤害
@@ -109,10 +99,10 @@ public class MeleeLogic : MonoBehaviour
             }
         }
     }
-    void PlayScreamSound()
+    void PlayAttackSound()
     {
-        int randomInt = Random.Range(0, ScreamSound.Length);
-        audioSource[1].clip = ScreamSound[randomInt];
+        int randomInt = Random.Range(0, AttackSound.Length);
+        audioSource[1].clip = AttackSound[randomInt];
         audioSource[1].spatialBlend = 1f;  // 启用 3D 音频设置
         audioSource[1].Play();
     }

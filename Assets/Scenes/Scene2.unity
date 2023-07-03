@@ -5214,7 +5214,7 @@ GameObject:
   - component: {fileID: 127375817}
   - component: {fileID: 127375816}
   m_Layer: 0
-  m_Name: Black ground
+  m_Name: Black ground 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28580,6 +28580,8 @@ PlayableDirector:
     value: {fileID: 990144047}
   - key: {fileID: 8510462214050547641, guid: 4de2cb6ae71e5c1479e1a0a4e4318c83, type: 2}
     value: {fileID: 615773954}
+  - key: {fileID: -770228255112689868, guid: 4de2cb6ae71e5c1479e1a0a4e4318c83, type: 2}
+    value: {fileID: 2071286272}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &775891593 stripped
@@ -41422,7 +41424,7 @@ GameObject:
   - component: {fileID: 1095755767}
   - component: {fileID: 1095755766}
   m_Layer: 0
-  m_Name: Black ground
+  m_Name: Black ground 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42747,6 +42749,8 @@ PlayableDirector:
     value: {fileID: 1497173064}
   - key: {fileID: -3399005880729541314, guid: d924b8f0b7a3d524fb65e478b1ce1165, type: 2}
     value: {fileID: 329143702}
+  - key: {fileID: -1880988484000887554, guid: d924b8f0b7a3d524fb65e478b1ce1165, type: 2}
+    value: {fileID: 127375815}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &1129871675
@@ -66504,7 +66508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1665042203
 Transform:
   m_ObjectHideFlags: 0
@@ -66537,7 +66541,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: b4a43ba588bce8247a690cf6e8dda19b, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -66570,6 +66574,8 @@ PlayableDirector:
     value: {fileID: 2084945257}
   - key: {fileID: -878938138023080388, guid: b4a43ba588bce8247a690cf6e8dda19b, type: 2}
     value: {fileID: 812098449}
+  - key: {fileID: -1731873971523012383, guid: b4a43ba588bce8247a690cf6e8dda19b, type: 2}
+    value: {fileID: 1095755764}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &1665938224
@@ -86541,7 +86547,7 @@ GameObject:
   - component: {fileID: 2071286274}
   - component: {fileID: 2071286273}
   m_Layer: 0
-  m_Name: Black ground
+  m_Name: ' black ground 2'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

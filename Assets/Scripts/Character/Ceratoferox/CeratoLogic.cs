@@ -55,7 +55,7 @@ public class CeratoLogic : MonoBehaviour
         {
             if (attackTimer >= timer)
             {
-                if (n >= 0)
+                if (n > 0)
                 {
                     Attack();
 
@@ -105,9 +105,16 @@ public class CeratoLogic : MonoBehaviour
         agent.isStopped = true;
         animator.SetBool("chase", false);
         animator.SetTrigger("roar");
-        //È«ÆÁ¹¥»÷Ö±½Ó¿ÛÑª
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(roarDamage);
-        n = 2;
+        //1.5±¶¹¥»÷·¶Î§Ö±½Ó¿ÛÑª
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange * 1.5f);
+        foreach (Collider obj in colliders)
+        {
+            if (obj.gameObject.CompareTag("Player"))
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(roarDamage);
+            }
+        }
+        n = 3;
 
         attackTimer = 0f;
     }
@@ -119,7 +126,6 @@ public class CeratoLogic : MonoBehaviour
     void ClawDown()
     {
         claw1.SetActive(false);
-        Debug.Log(n);
         n--;
     }
 }

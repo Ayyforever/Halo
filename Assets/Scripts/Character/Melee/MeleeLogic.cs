@@ -104,7 +104,10 @@ public class MeleeLogic : MonoBehaviour
             if (angle <= attackAngle && distance <= attackRange)
             {
                 //对玩家造成8点伤害
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
+                if (GameObject.FindGameObjectWithTag("Player") != null)
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
+                }
                 PlayHitSound();
             }
         }

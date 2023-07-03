@@ -6,9 +6,12 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
 
-
+    
     public static InventorySystem Instance { get; set; }
-
+    
+    
+    public GameObject ItemInfoUI;
+    
     public GameObject inventoryScreenUI;
 
     public List<GameObject> slotList = new List<GameObject>();
@@ -45,6 +48,7 @@ public class InventorySystem : MonoBehaviour
         PopulateSlotList();
 
 
+
     }
 
     private void PopulateSlotList()
@@ -61,15 +65,16 @@ public class InventorySystem : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.I) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.B) && !isOpen)
         {
-            
+              
+
             inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isOpen = true;
 
         }
-        else if (Input.GetKeyDown(KeyCode.I) && isOpen)
+        else if (Input.GetKeyDown(KeyCode.B) && isOpen)
         {
             inventoryScreenUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;

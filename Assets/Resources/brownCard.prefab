@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5227838549493803106}
   - component: {fileID: 5227838549493803107}
   - component: {fileID: 478862033063761663}
+  - component: {fileID: -1739118621503446823}
+  - component: {fileID: 606969914101344204}
   m_Layer: 5
   m_Name: brownCard
   m_TagString: Untagged
@@ -89,3 +91,32 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &-1739118621503446823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227838549493803105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c296a8f0ea55064daa69331e096969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrashable: 0
+  thisName: browncard
+  thisDescription: blrowncard
+  thisFunctionality: key
+  isConsumable: 0
+--- !u!114 &606969914101344204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227838549493803105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9940e50d57696140a6860f9dd982a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

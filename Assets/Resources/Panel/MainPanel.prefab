@@ -1012,6 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 2075317509980790528}
+  mainWp: {fileID: 0}
   Suffix: ' / '
 --- !u!114 &2075317511134253811 stripped
 MonoBehaviour:

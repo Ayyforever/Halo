@@ -31,6 +31,6 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         animator.SetTrigger("die");
-        Destroy(gameObject,2f);
+        Destroy(gameObject,3f);
     }
 }

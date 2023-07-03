@@ -22,7 +22,7 @@ public class GobblerLogic : MonoBehaviour
     //¹¥»÷¼ä¸ô
     public float timer = 4f;
 
-    public GameObject collider;
+    public GameObject body;
     //public GameObject claw2;
     private Transform player;
     private float distance;
@@ -97,13 +97,13 @@ public class GobblerLogic : MonoBehaviour
 
     void StartRoll()
     {
-        collider.SetActive(true);
+        body.SetActive(true);
+        endRoll -= 1;
     }
 
     void EndRoll()
     {
-        collider.SetActive(false);
-        endRoll -= 1;
+        body.SetActive(false);
     }
 
 }

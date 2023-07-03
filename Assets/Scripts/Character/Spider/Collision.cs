@@ -9,7 +9,7 @@ public class Collision : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,11 +20,11 @@ public class Collision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("name"+other.name);
+        Debug.Log("1");
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerHealth>().Damage(damage);
-            Debug.Log("hurt");
+            Debug.Log("ssss");
         }
     }
 }

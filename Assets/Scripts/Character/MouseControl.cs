@@ -74,4 +74,15 @@ public class MouseControl : MonoBehaviour
         Quaternion quaternion = Quaternion.Euler(PlayerRotation_Y, 0, 0);
         Player_Camera.localRotation = quaternion;
     }
+    public void Explosion_MouseControl(float xMouse, float yMouse)
+    {
+        //player rotate horizontal
+        Player_Object.Rotate(Vector3.up * xMouse);
+
+        //camera rotate vertical
+        PlayerRotation_Y -= yMouse;
+        PlayerRotation_Y = Mathf.Clamp(PlayerRotation_Y, -85f, 85f);
+        Quaternion quaternion = Quaternion.Euler(PlayerRotation_Y, 0, 0);
+        Player_Camera.localRotation = quaternion;
+    }
 }

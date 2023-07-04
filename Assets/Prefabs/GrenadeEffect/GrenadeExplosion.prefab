@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f411007ac9cdb5a46a9af48a7e3245d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseControl: {fileID: 0}
   audioSource: {fileID: -1368150502632275152}
   ExplosionSound:
   - {fileID: 8300000, guid: 81edccb2078fe554881bb605154bbdb6, type: 3}

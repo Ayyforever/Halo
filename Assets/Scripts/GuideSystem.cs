@@ -15,10 +15,33 @@ public class GuideSystem : MonoBehaviour
     {
         
     }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void PlayDialog()
+    {
+        guideScreenUI.SetActive(true);
+        Invoke("show", 4);
+
+    }
+
+    public void show()
+    {
+        guideScreenUI.SetActive(false);
     }
 }

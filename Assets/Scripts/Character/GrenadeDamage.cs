@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GrenadeDamage : MonoBehaviour
 {
+    public GameObject Explosion;
+
     //±¬Õ¨·¶Î§
     public float explosionRadius = 10f;
     // Start is called before the first frame update
@@ -20,6 +22,7 @@ public class GrenadeDamage : MonoBehaviour
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
+
         Explode();
     }
 
@@ -34,7 +37,8 @@ public class GrenadeDamage : MonoBehaviour
                 nearby.GetComponent<EnemyHealth>().Damage(50f);
             }
         }
-        //Ïú»ÙÁñµ¯£»
+        GameObject ExplosionOb = Instantiate(Explosion, transform.position, transform.rotation);
+        Destroy(ExplosionOb, 1.8f);
         Destroy(gameObject);
     }
 }

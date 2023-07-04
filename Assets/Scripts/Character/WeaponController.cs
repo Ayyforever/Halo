@@ -38,20 +38,19 @@ public class WeaponController : MonoBehaviour
     [Header("开火特效")]
     public ParticleSystem particle;
 
-    // 子弹预制体
+    [Header("子弹预制体")]
     public GameObject bulletPrefab;
     public GameObject bulletFolder;
     public GameObject firePoint;
 
-    // 击中特效
-    public GameObject hitEffect;
+    [Header("击中特效")]
     public GameObject flashLight;
     public GameObject hitParticle;
     public GameObject hitSmoke;
     public GameObject hitVestige;
     public GameObject hitBlood;
 
-    // 音效
+    [Header("音频设置")]
     public AudioSource[] audioSource = new AudioSource[2];
     public AudioClip[] WeaponSound = new AudioClip[5];
     public AudioClip[] ReloadSound = new AudioClip[3];
@@ -60,7 +59,6 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-        hitEffect.SetActive(false);
         for (int i = 0; i < reloadSound.Length; i++) { reloadSound[i] = true; }
     }
     void Update()
@@ -125,7 +123,6 @@ public class WeaponController : MonoBehaviour
         //发射射线
         if (Physics.Raycast(ShootorPoint.position, ShootorPoint.forward, out hit, range))
         {
-            hitEffect.SetActive(true);
             GameObject hitParticleOb = Instantiate(hitParticle, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             GameObject hitSmokeOb = Instantiate(hitSmoke, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
             Destroy(hitParticleOb, 0.2f);
@@ -141,7 +138,6 @@ public class WeaponController : MonoBehaviour
                 GameObject hitVestigeOb = Instantiate(hitVestige, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
                 Destroy(hitVestigeOb, 5.0f);
             }
-            hitEffect.SetActive(false);
         }
 
         fireTimer = 0;

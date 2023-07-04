@@ -7,6 +7,9 @@ public class EnemyHealth : MonoBehaviour
     public float hp = 100f;
     public Animator animator;
 
+    [Header("“Ù∆µ…Ë÷√")]
+    public AudioSource audioSource;
+    public AudioClip[] DeathSound = new AudioClip[1];
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,10 @@ public class EnemyHealth : MonoBehaviour
         if (hp <= 0)
         {
             Die();
+            int randomInt = Random.Range(0, DeathSound.Length);
+            audioSource.clip = DeathSound[randomInt];
+            audioSource.spatialBlend = 1f;  // ∆Ù”√ 3D “Ù∆µ…Ë÷√
+            audioSource.Play();
         }
     }
 

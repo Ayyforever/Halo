@@ -22,7 +22,6 @@ public class GrenadeDamage : MonoBehaviour
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-
         Explode();
     }
 
@@ -34,7 +33,9 @@ public class GrenadeDamage : MonoBehaviour
             //ПлбЊ
             if (nearby.GetComponent<EnemyHealth>() != null)
             {
-                nearby.GetComponent<EnemyHealth>().Damage(50f);
+                float d = Vector3.Distance(nearby.transform.position, transform.position);
+                float damage = (1 - d / explosionRadius) * 100f;
+                nearby.GetComponent<EnemyHealth>().Damage(damage);
             }
         }
         GameObject ExplosionOb = Instantiate(Explosion, transform.position, transform.rotation);

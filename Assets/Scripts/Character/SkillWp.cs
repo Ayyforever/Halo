@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillWp : MonoBehaviour
 {
     public Animator animator;
-
+    public MouseControl mouseControl;
     //能量
     public float power = 0f;
     private bool grenadeMode;
@@ -83,6 +83,10 @@ public class SkillWp : MonoBehaviour
         audioSource.Play();
         animator.SetTrigger("fight");
         //发射子弹
+        // 后坐力
+        float yMouse = Random.Range(6f, 10f);
+        mouseControl.Recoil_MouseControl(0f, yMouse);
+
         // 实例化榴弹预制体
         GameObject grenade = Instantiate(grenadePrefab, firePoint.transform.position,firePoint.transform.rotation, grenadeFolder.transform);
 

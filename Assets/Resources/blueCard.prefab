@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4655856372021067691}
   - component: {fileID: 5481646135718678474}
   - component: {fileID: 1386427182685479471}
-  - component: {fileID: 7281047272592500344}
   m_Layer: 5
   m_Name: blueCard
   m_TagString: Untagged
@@ -103,20 +102,3 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &7281047272592500344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4655856372021067693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c296a8f0ea55064daa69331e096969d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTrashable: 0
-  thisName: bluecard
-  thisDescription: bluecard
-  thisFunctionality: key
-  isConsumable: 0

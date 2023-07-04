@@ -112,7 +112,7 @@ namespace Michsky.UI.Shift
         public void TextureSet(int index)
         {
             // 0 = Full, 4 = Eight Resolution
-           // QualitySettings.globalTextureMipmapLimit = index;
+            QualitySettings.globalTextureMipmapLimit = index;
         }
 
         public void SoftParticleSet(int index)

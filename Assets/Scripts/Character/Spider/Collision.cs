@@ -20,6 +20,7 @@ public class Collision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("name"+other.name);
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerHealth>().Damage(damage);

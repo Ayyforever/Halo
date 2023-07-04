@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
 
     
     public static InventorySystem Instance { get; set; }
-    
-    
+
+    public GameObject plotScreenUI;
+
+    Button closed;
+    public Text itemPlot;
+
     public GameObject ItemInfoUI;
     
     public GameObject inventoryScreenUI;
@@ -23,6 +28,8 @@ public class InventorySystem : MonoBehaviour
     private GameObject whatSlotToEquip;
 
     public bool isOpen;
+
+  
 
     //public bool isFull;
 
@@ -48,9 +55,17 @@ public class InventorySystem : MonoBehaviour
         PopulateSlotList();
 
 
+        closed = plotScreenUI.transform.Find("Button").GetComponent<Button>();
+        closed.onClick.AddListener(delegate { ClosePlotScreen(); });
 
+        
     }
 
+    private void ClosePlotScreen()
+    {
+        
+        InventorySystem.Instance.plotScreenUI.SetActive(false);
+    }
     private void PopulateSlotList()
     {
         foreach (Transform child in inventoryScreenUI.transform)

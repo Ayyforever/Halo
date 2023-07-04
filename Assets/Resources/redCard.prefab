@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6056640537654188278}
   - component: {fileID: 6983571409383716907}
   - component: {fileID: 7909916210948172740}
+  - component: {fileID: 2998715881569102758}
   m_Layer: 5
   m_Name: redCard
   m_TagString: Untagged
@@ -102,3 +103,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2998715881569102758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056640537654188264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c296a8f0ea55064daa69331e096969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrashable: 0
+  thisName: rcard
+  thisDescription: rcard
+  thisFunctionality: card
+  isConsumable: 0

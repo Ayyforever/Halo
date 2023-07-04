@@ -2,13 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
 
-
+    
     public static InventorySystem Instance { get; set; }
 
+    public GameObject plotScreenUI;
+
+    Button closed;
+    public Text itemPlot;
+
+    public GameObject ItemInfoUI;
+    
     public GameObject inventoryScreenUI;
 
     public List<GameObject> slotList = new List<GameObject>();
@@ -20,6 +28,8 @@ public class InventorySystem : MonoBehaviour
     private GameObject whatSlotToEquip;
 
     public bool isOpen;
+
+  
 
     //public bool isFull;
 
@@ -45,8 +55,17 @@ public class InventorySystem : MonoBehaviour
         PopulateSlotList();
 
 
+        closed = plotScreenUI.transform.Find("Button").GetComponent<Button>();
+        closed.onClick.AddListener(delegate { ClosePlotScreen(); });
+
+        
     }
 
+    private void ClosePlotScreen()
+    {
+        
+        InventorySystem.Instance.plotScreenUI.SetActive(false);
+    }
     private void PopulateSlotList()
     {
         foreach (Transform child in inventoryScreenUI.transform)
@@ -61,15 +80,16 @@ public class InventorySystem : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.I) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.B) && !isOpen)
         {
-            
+              
+
             inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isOpen = true;
 
         }
-        else if (Input.GetKeyDown(KeyCode.I) && isOpen)
+        else if (Input.GetKeyDown(KeyCode.B) && isOpen)
         {
             inventoryScreenUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;

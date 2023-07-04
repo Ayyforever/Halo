@@ -8,6 +8,11 @@ public class Logic : MonoBehaviour
     public NavMeshAgent agent;
     public Animator animator;
 
+    //…À∫¶≈–∂œ
+    public bool damageBool;
+    //…À∫¶÷µ
+    public float damage=3f;
+
 
     public float chaseRange = 40f;
     public float attackRange = 8f;
@@ -41,6 +46,10 @@ public class Logic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GetComponent<EnemyHealth>().die)
+        {
+            return;
+        }
         Control();
     }
 
@@ -102,8 +111,13 @@ public class Logic : MonoBehaviour
 
     void ClawDown()
     {
+        //…À∫¶
+        if (damageBool)
+        {
+            player.GetComponent<PlayerHealth>().Damage(damage);
+            damageBool = false;
+        }
         claw1.SetActive(false);
         claw2.SetActive(false);
-        
     }
 }

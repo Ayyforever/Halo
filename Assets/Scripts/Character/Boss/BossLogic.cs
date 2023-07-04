@@ -22,7 +22,7 @@ public class BossLogic : MonoBehaviour
 
     public Animator animator;
 
-    private float maxDeviationAngle = 0f; // ×î´óÆ«Àë½Ç¶È
+   
 
     private float n = 0;
 

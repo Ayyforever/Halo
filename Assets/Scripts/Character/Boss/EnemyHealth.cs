@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public bool die;
     public float hp = 100f;
     public Animator animator;
 
@@ -38,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         animator.SetTrigger("die");
+        die = true;
         Destroy(gameObject,3f);
     }
 }

@@ -1,79 +1,215 @@
 fileFormatVersion: 2
 guid: a0a0d3bacc694be45866bb1aa3969b9b
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Arack_Abdomen
-    100004: Arack_Head
-    100006: Arack_Hips
-    100008: Arack_LegFrontLeft_1
-    100010: Arack_LegFrontLeft_2
-    100012: Arack_LegFrontLeft_3
-    100014: Arack_LegFrontLeft_4
-    100016: Arack_LegFrontLeft_5
-    100018: Arack_LegFrontRight_1
-    100020: Arack_LegFrontRight_2
-    100022: Arack_LegFrontRight_3
-    100024: Arack_LegFrontRight_4
-    100026: Arack_LegFrontRight_5
-    100028: Arack_LegRearLeft_1
-    100030: Arack_LegRearLeft_2
-    100032: Arack_LegRearLeft_3
-    100034: Arack_LegRearLeft_4
-    100036: Arack_LegRearLeft_5
-    100038: Arack_LegRearRight_1
-    100040: Arack_LegRearRight_2
-    100042: Arack_LegRearRight_3
-    100044: Arack_LegRearRight_4
-    100046: Arack_LegRearRight_5
-    100048: Arack_MandibuleLowerLeft_A
-    100050: Arack_MandibuleLowerLeft_B
-    100052: Arack_MandibuleLowerRight_A
-    100054: Arack_MandibuleLowerRight_B
-    100056: Arack_MandibuleUpperLeft_A
-    100058: Arack_MandibuleUpperLeft_B
-    100060: Arack_MandibuleUpperRight_A
-    100062: Arack_MandibuleUpperRight_B
-    100064: root
-    400000: //RootNode
-    400002: Arack_Abdomen
-    400004: Arack_Head
-    400006: Arack_Hips
-    400008: Arack_LegFrontLeft_1
-    400010: Arack_LegFrontLeft_2
-    400012: Arack_LegFrontLeft_3
-    400014: Arack_LegFrontLeft_4
-    400016: Arack_LegFrontLeft_5
-    400018: Arack_LegFrontRight_1
-    400020: Arack_LegFrontRight_2
-    400022: Arack_LegFrontRight_3
-    400024: Arack_LegFrontRight_4
-    400026: Arack_LegFrontRight_5
-    400028: Arack_LegRearLeft_1
-    400030: Arack_LegRearLeft_2
-    400032: Arack_LegRearLeft_3
-    400034: Arack_LegRearLeft_4
-    400036: Arack_LegRearLeft_5
-    400038: Arack_LegRearRight_1
-    400040: Arack_LegRearRight_2
-    400042: Arack_LegRearRight_3
-    400044: Arack_LegRearRight_4
-    400046: Arack_LegRearRight_5
-    400048: Arack_MandibuleLowerLeft_A
-    400050: Arack_MandibuleLowerLeft_B
-    400052: Arack_MandibuleLowerRight_A
-    400054: Arack_MandibuleLowerRight_B
-    400056: Arack_MandibuleUpperLeft_A
-    400058: Arack_MandibuleUpperLeft_B
-    400060: Arack_MandibuleUpperRight_A
-    400062: Arack_MandibuleUpperRight_B
-    400064: root
-    7400000: Death
-    9500000: //RootNode
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Arack_Abdomen
+  - first:
+      1: 100004
+    second: Arack_Head
+  - first:
+      1: 100006
+    second: Arack_Hips
+  - first:
+      1: 100008
+    second: Arack_LegFrontLeft_1
+  - first:
+      1: 100010
+    second: Arack_LegFrontLeft_2
+  - first:
+      1: 100012
+    second: Arack_LegFrontLeft_3
+  - first:
+      1: 100014
+    second: Arack_LegFrontLeft_4
+  - first:
+      1: 100016
+    second: Arack_LegFrontLeft_5
+  - first:
+      1: 100018
+    second: Arack_LegFrontRight_1
+  - first:
+      1: 100020
+    second: Arack_LegFrontRight_2
+  - first:
+      1: 100022
+    second: Arack_LegFrontRight_3
+  - first:
+      1: 100024
+    second: Arack_LegFrontRight_4
+  - first:
+      1: 100026
+    second: Arack_LegFrontRight_5
+  - first:
+      1: 100028
+    second: Arack_LegRearLeft_1
+  - first:
+      1: 100030
+    second: Arack_LegRearLeft_2
+  - first:
+      1: 100032
+    second: Arack_LegRearLeft_3
+  - first:
+      1: 100034
+    second: Arack_LegRearLeft_4
+  - first:
+      1: 100036
+    second: Arack_LegRearLeft_5
+  - first:
+      1: 100038
+    second: Arack_LegRearRight_1
+  - first:
+      1: 100040
+    second: Arack_LegRearRight_2
+  - first:
+      1: 100042
+    second: Arack_LegRearRight_3
+  - first:
+      1: 100044
+    second: Arack_LegRearRight_4
+  - first:
+      1: 100046
+    second: Arack_LegRearRight_5
+  - first:
+      1: 100048
+    second: Arack_MandibuleLowerLeft_A
+  - first:
+      1: 100050
+    second: Arack_MandibuleLowerLeft_B
+  - first:
+      1: 100052
+    second: Arack_MandibuleLowerRight_A
+  - first:
+      1: 100054
+    second: Arack_MandibuleLowerRight_B
+  - first:
+      1: 100056
+    second: Arack_MandibuleUpperLeft_A
+  - first:
+      1: 100058
+    second: Arack_MandibuleUpperLeft_B
+  - first:
+      1: 100060
+    second: Arack_MandibuleUpperRight_A
+  - first:
+      1: 100062
+    second: Arack_MandibuleUpperRight_B
+  - first:
+      1: 100064
+    second: root
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Arack_Abdomen
+  - first:
+      4: 400004
+    second: Arack_Head
+  - first:
+      4: 400006
+    second: Arack_Hips
+  - first:
+      4: 400008
+    second: Arack_LegFrontLeft_1
+  - first:
+      4: 400010
+    second: Arack_LegFrontLeft_2
+  - first:
+      4: 400012
+    second: Arack_LegFrontLeft_3
+  - first:
+      4: 400014
+    second: Arack_LegFrontLeft_4
+  - first:
+      4: 400016
+    second: Arack_LegFrontLeft_5
+  - first:
+      4: 400018
+    second: Arack_LegFrontRight_1
+  - first:
+      4: 400020
+    second: Arack_LegFrontRight_2
+  - first:
+      4: 400022
+    second: Arack_LegFrontRight_3
+  - first:
+      4: 400024
+    second: Arack_LegFrontRight_4
+  - first:
+      4: 400026
+    second: Arack_LegFrontRight_5
+  - first:
+      4: 400028
+    second: Arack_LegRearLeft_1
+  - first:
+      4: 400030
+    second: Arack_LegRearLeft_2
+  - first:
+      4: 400032
+    second: Arack_LegRearLeft_3
+  - first:
+      4: 400034
+    second: Arack_LegRearLeft_4
+  - first:
+      4: 400036
+    second: Arack_LegRearLeft_5
+  - first:
+      4: 400038
+    second: Arack_LegRearRight_1
+  - first:
+      4: 400040
+    second: Arack_LegRearRight_2
+  - first:
+      4: 400042
+    second: Arack_LegRearRight_3
+  - first:
+      4: 400044
+    second: Arack_LegRearRight_4
+  - first:
+      4: 400046
+    second: Arack_LegRearRight_5
+  - first:
+      4: 400048
+    second: Arack_MandibuleLowerLeft_A
+  - first:
+      4: 400050
+    second: Arack_MandibuleLowerLeft_B
+  - first:
+      4: 400052
+    second: Arack_MandibuleLowerRight_A
+  - first:
+      4: 400054
+    second: Arack_MandibuleLowerRight_B
+  - first:
+      4: 400056
+    second: Arack_MandibuleUpperLeft_A
+  - first:
+      4: 400058
+    second: Arack_MandibuleUpperLeft_B
+  - first:
+      4: 400060
+    second: Arack_MandibuleUpperRight_A
+  - first:
+      4: 400062
+    second: Arack_MandibuleUpperRight_B
+  - first:
+      4: 400064
+    second: root
+  - first:
+      74: 7400000
+    second: Death
+  - first:
+      95: 9500000
+    second: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -82,6 +218,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -102,6 +239,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Death
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -110,7 +248,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -134,25 +272,34 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -161,10 +308,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -174,14 +321,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: root
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 9edbcaf172ed4fe42a3c523ab930094d,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 9edbcaf172ed4fe42a3c523ab930094d, type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

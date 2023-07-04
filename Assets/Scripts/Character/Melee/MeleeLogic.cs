@@ -12,10 +12,12 @@ public class MeleeLogic : MonoBehaviour
     public float chaseRange = 40f;
     public float attackRange = 8f;
 
-    //¹¥»÷½Ç¶È
-    public float attackAngle = 60f;
+    public GameObject claw;
+
+    public bool damageBool;
+    public float damage = 8f;
     //¹¥»÷¼ÆÊ±
-    public float attackTimer = 3f;
+    public float attackTimer;
     //¹¥»÷¼ä¸ô
     public float timer = 3f;
 
@@ -28,17 +30,22 @@ public class MeleeLogic : MonoBehaviour
     [Header("¹¥»÷Éù")]
     public AudioClip[] AttackSound = new AudioClip[2];
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        attackTimer = timer;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<EnemyHealth>().die)
+        {
+            return;
+        }
         distance = Vector3.Distance(transform.position, player.position);
         if (distance <= warnRange)
         {
@@ -56,9 +63,7 @@ public class MeleeLogic : MonoBehaviour
                 }
                 else
                 {
-                    //Ð­³Ì
-                    StartCoroutine(Attack());
-                    attackTimer = 0f;
+                    Attack();
                 }
             }
             else
@@ -80,28 +85,33 @@ public class MeleeLogic : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
-    private IEnumerator Attack()
+    void Attack()
     {
         agent.isStopped = true;
         animator.SetTrigger("attackTri");
-        yield return new WaitForSeconds(0.6f/*animator.GetCurrentAnimatorClipInfo(0)[0].clip.length*/);
-        //¹¥»÷ÅÐ¶¨
-        {
-            Vector3 direction = (player.position - transform.position).normalized;
-            float angle = Vector3.Angle(transform.forward, direction);
-            distance = Vector3.Distance(transform.position, player.position);
-            PlayAttackSound();
-            if (angle <= attackAngle && distance <= attackRange)
-            {
-                //¶ÔÍæ¼ÒÔì³É8µãÉËº¦
-                if (GameObject.FindGameObjectWithTag("Player") != null)
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(8f);
-                }
-                PlayHitSound();
-            }
-        }
+    
+       
+        attackTimer = 0f;
     }
+
+    void ClawActive()
+    {
+
+        claw.SetActive(true); 
+    }
+
+    void ClawDown()
+    {
+        //ÉËº¦
+        if (damageBool)
+        {
+            player.GetComponent<PlayerHealth>().Damage(damage);
+            damageBool = false;
+            PlayHitSound();
+        }
+        claw.SetActive(false);
+    }
+
     void PlayAttackSound()
     {
         int randomInt = Random.Range(0, AttackSound.Length);

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class CeratoCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            gameObject.GetComponentInParent<Logic>().damageBool = true;
+            gameObject.GetComponentInParent<CeratoLogic>().damageBool = true;
         }
     }
 }
+

@@ -12,10 +12,16 @@ public class CeratoLogic : MonoBehaviour
     public float chaseRange = 40f;
     public float attackRange = 8f;
 
+
+    //ÉËº¦ÅÐ¶Ï
+    public bool damageBool;
+    //ÉËº¦Öµ
+    public float damage = 6f;
+
     //roar¹¥»÷¼ä¸ô
     public int n = 3;
     //roarÉËº¦
-    public float roarDamage = 3f;
+    public float roarDamage = 4f;
     //¹¥»÷¼ÆÊ±
     private float attackTimer;
 
@@ -40,6 +46,10 @@ public class CeratoLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<EnemyHealth>().die)
+        {
+            return;
+        }
         Control();
     }
 
@@ -111,7 +121,7 @@ public class CeratoLogic : MonoBehaviour
         {
             if (obj.gameObject.CompareTag("Player"))
             {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Damage(roarDamage);
+                player.GetComponent<PlayerHealth>().Damage(roarDamage);
             }
         }
         n = 3;
@@ -125,6 +135,11 @@ public class CeratoLogic : MonoBehaviour
 
     void ClawDown()
     {
+        if (damageBool)
+        {
+            player.GetComponent<PlayerHealth>().Damage(damage);
+            damageBool = false;
+        }
         claw1.SetActive(false);
         n--;
     }

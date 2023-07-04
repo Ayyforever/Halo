@@ -12,10 +12,14 @@ public class GobblerLogic : MonoBehaviour
     public float chaseRange = 40f;
     public float attackRange = 8f;
 
-    
     public int endRoll = 3;
-    //roar…À∫¶
-  
+
+
+    //…À∫¶≈–∂œ
+    public bool damageBool;
+    //…À∫¶÷µ
+    public float damage = 3f;
+
     //π•ª˜º∆ ±
     private float attackTimer;
 
@@ -40,6 +44,10 @@ public class GobblerLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<EnemyHealth>().die)
+        {
+            return;
+        }
         Control();
     }
 
@@ -65,6 +73,7 @@ public class GobblerLogic : MonoBehaviour
         else
         {
             Chase();
+            attackTimer += Time.deltaTime;
         }
         if(endRoll <=0 )
         {
@@ -87,7 +96,7 @@ public class GobblerLogic : MonoBehaviour
         //Õ£œ¬––◊ﬂ∂Øª≠
         animator.SetBool("chase", false);
 
-        endRoll = 5;
+        endRoll = 3;
 
         animator.SetTrigger("attack");
         
@@ -97,6 +106,11 @@ public class GobblerLogic : MonoBehaviour
 
     void StartRoll()
     {
+        if (damageBool)
+        {
+            player.GetComponent<PlayerHealth>().Damage(damage);
+            damageBool = false;
+        }
         body.SetActive(true);
         endRoll -= 1;
     }

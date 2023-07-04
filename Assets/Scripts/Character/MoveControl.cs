@@ -147,17 +147,12 @@ public class MoveControl : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    //“∆∂Ø“Ù–ß
-    //void FootstepSource()
-    //{
-    //    if (controller.isGrounded && GMove())
-    //    {
-    //        audioSource.clip = walkingSound;
-    //        if (!audioSource.isPlaying)
-    //        {
-    //            audioSource.Play();
-    //        }
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            controller.detectCollisions = false;
+        }
+    }
 
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyTrigger : MonoBehaviour
 {
+    //怪物刷新数量
+    public int n;
     public GameObject monsterPrefab;
 
     public Transform monsterTransform; 
@@ -21,20 +23,22 @@ public class EnemyTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("111111");
+        
         if (other.CompareTag("Player"))
         {
             // 当玩家进入触发器时生成怪物
             GenerateMonster();
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
     private void GenerateMonster()
     {
-        Debug.Log("trigger");
-        // 根据需要生成怪物的逻辑，例如实例化怪物预制体并设置位置等
-        Instantiate(monsterPrefab, monsterTransform.position, Quaternion.identity);
+        for (int i = 0; i < n; i++)
+        {
+            // 根据需要生成怪物的逻辑，例如实例化怪物预制体并设置位置等
+            Instantiate(monsterPrefab, monsterTransform.position, Quaternion.identity);
+        }
     }
 }

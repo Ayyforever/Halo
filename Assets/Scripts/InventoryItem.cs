@@ -72,6 +72,7 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
                 plotText = Resources.Load(filename) as TextAsset;
                 InventorySystem.Instance.itemPlot.text = plotText.text;
                 InventorySystem.Instance.inventoryScreenUI.SetActive(false);
+                
                 InventorySystem.Instance.plotScreenUI.SetActive(true);
                
             }else if(isConsumable){
@@ -99,5 +100,7 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
         }
         itemInfoUI.SetActive(false);
         InventorySystem.Instance.inventoryScreenUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        InventorySystem.Instance.isOpen = false;
     }
 }

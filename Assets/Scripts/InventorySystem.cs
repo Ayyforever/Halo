@@ -65,6 +65,8 @@ public class InventorySystem : MonoBehaviour
     {
         
         InventorySystem.Instance.plotScreenUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        InventorySystem.Instance.isOpen = false;
     }
     private void PopulateSlotList()
     {

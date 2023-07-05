@@ -64,23 +64,27 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         //»»µ¯
-        bool A = Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag;
-        bool B = bulletLeft == 0;
-        if ((A || B) && bulletTotal != 0 && reloadTime == 0.0f) 
+        if (!InventorySystem.Instance.isOpen)
         {
-            animator.SetTrigger("reload");
-            reloadTime = Time.deltaTime;
+            bool A = Input.GetKeyDown(KeyCode.R) && bulletLeft < bulletMag;
+            bool B = bulletLeft == 0;
+            if ((A || B) && bulletTotal != 0 && reloadTime == 0.0f)
+            {
+                animator.SetTrigger("reload");
+                reloadTime = Time.deltaTime;
+            }
+            if (reloadTime != 0.0f)
+            {
+                Reload();
+            }
+            //Éä»÷
+            else if (Input.GetMouseButton(0))
+            {
+                fire = Shoot();
+            }
+            fireTimer += Time.deltaTime;
         }
-        if(reloadTime != 0.0f)
-        {
-            Reload();
-        }
-        //Éä»÷
-        else if(Input.GetMouseButton(0))
-        {
-            fire = Shoot();
-        }
-        fireTimer += Time.deltaTime;
+        
     }
      bool Shoot()
     {
@@ -129,6 +133,7 @@ public class WeaponController : MonoBehaviour
             Destroy(hitSmokeOb, 1.0f);
             if (hit.collider.gameObject.tag == "Enemy")
             {
+                GetComponent<SkillWp>().power++;
                 hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
                 GameObject hitBloodOb = Instantiate(hitBlood, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
                 Destroy(hitBloodOb, 0.5f);

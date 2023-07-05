@@ -12,8 +12,8 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
 
     private GameObject itemInfoUI;
 
-    
-    
+
+    string filename;
 
     private Text itemInfoUI_itemName;
     private Text itemInfoUI_itemDescription;
@@ -23,8 +23,16 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
 
 
     public bool isRead;
+   
+
     TextAsset plotText;
 
+    public bool isConsumable;
+    public float hpEffect;
+
+    GameObject player;
+    PlayerHealth playerHealth;
+    float maxHP = 100;
     private void Start()
     {
         itemInfoUI = InventorySystem.Instance.ItemInfoUI;
@@ -32,9 +40,9 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
         itemInfoUI_itemDescription = itemInfoUI.transform.Find("itemDescription").GetComponent<Text>();
         itemInfoUI_itemFunctionality = itemInfoUI.transform.Find("itemFunctionality").GetComponent<Text>();
 
-        
-        
 
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
    
@@ -59,14 +67,37 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
         {
             if (isRead)
             {
-                plotText = Resources.Load("test") as TextAsset;
+
+                filename = SelectionManager.Instance.selectionObjectFile;
+                plotText = Resources.Load(filename) as TextAsset;
                 InventorySystem.Instance.itemPlot.text = plotText.text;
                 InventorySystem.Instance.inventoryScreenUI.SetActive(false);
                 InventorySystem.Instance.plotScreenUI.SetActive(true);
                
+            }else if(isConsumable){
+                
+                healthEffectCalculation(hpEffect);
+                Destroy(gameObject);
             }
         }
 
     }
 
+    private void healthEffectCalculation(float healthEffect)
+    {
+        
+        if (healthEffect != 0)
+        {
+            if ((playerHealth.hp + healthEffect) > maxHP)
+            {
+                playerHealth.hp = maxHP;
+            }
+            else
+            {
+                playerHealth.hp = playerHealth.hp + healthEffect;
+            }
+        }
+        itemInfoUI.SetActive(false);
+        InventorySystem.Instance.inventoryScreenUI.SetActive(false);
+    }
 }

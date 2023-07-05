@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Slot
+  - BossTag
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MiniMap
   - Water
   - UI
   - Ground

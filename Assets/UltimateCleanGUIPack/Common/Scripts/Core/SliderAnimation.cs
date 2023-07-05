@@ -15,79 +15,58 @@ namespace UltimateClean
     /// </summary>
     public class SliderAnimation : MonoBehaviour
     {
+        public Image progressBar;
+
+        public SlicedFilledImage sliced;
+
         public TextMeshProUGUI text;
 
         public float duration = 1;
 
-        private Image image;
-        private SlicedFilledImage slicedImage;
+        //private float time = 0.0f;
 
-        private StringBuilder strBuilder = new StringBuilder(4);
-        private int lastPercentage = -1;
-
-        private void Awake()
+        private float initialFillAmount; // 初始填充量
+        void Start()
         {
-            image = GetComponent<Image>();
-            slicedImage = GetComponent<SlicedFilledImage>();
-
-            if (duration > 0)
-                StartCoroutine(Animate());
+            initialFillAmount = 0.0f; // 设置初始填充量为满值
+            progressBar.fillAmount = initialFillAmount; // 设置血条的初始填充量
+            sliced.fillAmount = initialFillAmount;
+        }
+        void Update()
+        {
+            Animate();
         }
 
-        private void OnDestroy()
+        private void Animate()
         {
-            StopAllCoroutines();
-        }
-
-        private IEnumerator Animate()
-        {
-            while (true)
+            //float currentFillAmount = progressBar.fillAmount; // 当前填充量
+            if (GameObject.FindGameObjectWithTag("Player"))
             {
-                var ratio = 0.0f;
-                var multiplier = 1.0f / duration;
-                while (ratio < 1.0f)
-                {
-                    ratio += Time.deltaTime * multiplier;
-
-                    if (image != null)
-                        image.fillAmount = ratio;
-                    else if (slicedImage != null)
-                        slicedImage.fillAmount = ratio;
-
-                    var percentage = (int)(ratio/1.0f * 100);
-                    if (percentage != lastPercentage)
-                    {
-                        lastPercentage = percentage;
-                        if (text != null)
-                        {
-                            strBuilder.Clear();
-                            text.text = strBuilder.Append(lastPercentage).Append("%").ToString();
-                        }
-                    }
-
-                    yield return null;
-                }
-
-                if (text != null)
-                    text.text = "100%";
-
-                yield return null;
-
-                while (ratio > 0)
-                {
-                    ratio -= Time.deltaTime * multiplier;
-
-                    if (image != null)
-                        image.fillAmount = ratio;
-                    else if (slicedImage != null)
-                        slicedImage.fillAmount = ratio;
-
-                    if (text != null)
-                        text.text = $"{(int)(ratio/1.0f * 100)}%";
-
-                    yield return null;
-                }
+                float targetFillAmount = CalculateFillAmount(); // 目标填充量
+                progressBar.fillAmount = targetFillAmount; // 确保填充量最终达到目标值
+                sliced.fillAmount = targetFillAmount;
             }
+
+            /*while (time < duration)
+            {
+                time += Time.deltaTime;
+                //progressBar.fillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, time / duration);
+                progressBar.fillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, time / duration);
+
+            }*/
+        }
+
+        private float CalculateFillAmount()
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Camera camera = player.GetComponentInChildren<Camera>();
+            GameObject weapon = camera.transform.Find("Weapon").gameObject;
+            GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
+            SkillWp skill = mainWp.GetComponent<SkillWp>();
+            // 根据你的具体逻辑计算当前血量对应的填充量
+            // 这里假设血量值为Health，范围为0到100，填充量范围为0到1
+            float currentHealth = skill.power;// 获取当前血量的逻辑，例如GameManager.Instance.GetPlayerHealth();
+            return Mathf.InverseLerp(0, skill.powerLimit, currentHealth); // 将血量映射到填充量范围
         }
     }
 }

@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTrashable: 0
-  thisName: 1
-  thisDescription: 1
+  thisName: greenCard
+  thisDescription: "\u4E00\u5F20\u7EFF\u8272\u7684\u5361\uFF0C\u53EF\u4EE5\u6253\u5F00\u8FF7\u5BAB\u4E2D\u7684\u67D0\u4E00\u6247\u95E8"
   thisFunctionality: 1
   isRead: 0

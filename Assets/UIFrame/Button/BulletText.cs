@@ -33,28 +33,33 @@ namespace UltimateClean
 
         private void Start()
         {
-            SetAmountText(progressBar.fillAmount);
+            if (GameObject.FindGameObjectWithTag("Player"))
+            {
+                SetAmountText(progressBar.fillAmount);
+            }
+            
         }
 
         private void Update()
         {
-            SetAmountText(progressBar.fillAmount);
+            if (GameObject.FindGameObjectWithTag("Player"))
+            {
+                SetAmountText(progressBar.fillAmount);
+            }
+            
         }
 
         private void SetAmountText(float value)
         {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                Camera camera = player.GetComponentInChildren<Camera>();
+                GameObject weapon = camera.transform.Find("Weapon").gameObject;
+                GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
+                WeaponController weaponController = mainWp.GetComponent<WeaponController>();
+                int Left = player.GetComponentInChildren<WeaponController>().bulletLeft;
+                int Total = player.GetComponentInChildren<WeaponController>().bulletTotal;
 
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            
-            //GameObject camera = player.transform.Find("Camera").gameObject;
-            //GameObject weapon = camera.transform.Find("Weapon").gameObject;
-            //GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
-           // WeaponController weaponController = player.GetComponentInChildren<WeaponController>();
-           // mainWp.GetComponent<WeaponController>();
-            //int Left = player.GetComponentInChildren<WeaponController>().bulletLeft;
-            //int Total = player.GetComponentInChildren<WeaponController>().bulletTotal;
-
-            //text.text = $"{Left}{Suffix}{Total}";
+                text.text = $"{Left}{Suffix}{Total}";
         }
     }
 }

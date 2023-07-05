@@ -8,11 +8,16 @@ public class InteractableObject : MonoBehaviour
 
     public string ItemName;
 
+    public string Filename;
     public string GetItemName()
     {
         return ItemName;
     }
 
+    public string GetFilename()
+    {
+        return Filename;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G) && playerInRange&&SelectionManager.Instance.onTarget&&SelectionManager.Instance.selectedObject==gameObject)

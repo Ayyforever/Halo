@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTrashable: 0
-  thisName: 1
-  thisDescription: 1
-  thisFunctionality: 1
+  thisName: redCard
+  thisDescription: "\u53EF\u4EE5\u6253\u5F00\u5668\u68B0\u5E93\u548C\u5F39\u836F\u5E93\u7684\u5927\u95E8"
+  thisFunctionality: 
   isRead: 0

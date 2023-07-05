@@ -29,15 +29,18 @@ namespace UltimateClean
         }
         void Update()
         {
-            StartCoroutine(Animate());
+            Animate();
         }
 
-        private IEnumerator Animate()
+        private void Animate()
         {
             float currentFillAmount = progressBar.fillAmount; // 当前填充量
-            float targetFillAmount = CalculateFillAmount(); // 目标填充量
-
-
+            if (GameObject.FindGameObjectWithTag("Player"))
+            {
+                float targetFillAmount = CalculateFillAmount(); // 目标填充量
+                progressBar.fillAmount = targetFillAmount; // 确保填充量最终达到目标值
+            }
+            
             /*while (time < duration)
             {
                 time += Time.deltaTime;
@@ -45,9 +48,6 @@ namespace UltimateClean
                 progressBar.fillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, time / duration);
 
             }*/
-
-            progressBar.fillAmount = targetFillAmount; // 确保填充量最终达到目标值
-            yield return null;
         }
 
         private float CalculateFillAmount()

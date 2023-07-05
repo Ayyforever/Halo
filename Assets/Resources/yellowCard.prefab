@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTrashable: 0
-  thisName: 1
-  thisDescription: 1
-  thisFunctionality: 1
+  thisName: yellowCard
+  thisDescription: "\u9EC4\u8272\u7684\u5361\uFF0C\u7528\u6765\u8FDB\u5165\u4F5C\u6218\u4F1A\u8BAE\u5BA4"
+  thisFunctionality: 
   isRead: 0

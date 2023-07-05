@@ -9,6 +9,7 @@ public class MoveControl : MonoBehaviour
     private bool groundedPlayer;
     [Range(1f,25f)]
     public float playerSpeed = 5.0f;
+    public bool gMove = false;
 
     //ÌøÔ¾µÈ´ý
     private bool jumpWait;
@@ -17,7 +18,7 @@ public class MoveControl : MonoBehaviour
 
     [Header("½Å²½ÒôÆµ¼ä¸ô")]
     private float footSoundWait = 0.0f;
-    private float maxFootSoundWait = 1.0f;
+    private float maxFootSoundWait = 0.5f;
     public float runRate = 1.3f;
 
     [Header("×ßÂ·ÊÓ½ÇÒ¡»Î")]
@@ -67,13 +68,13 @@ public class MoveControl : MonoBehaviour
             }
             if(moveTime < 1.0f)
             {
-                moveTime += Time.deltaTime;
+                moveTime += 2f * Time.deltaTime;
             }
             float moveRotateY = 0;
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 move *= runRate;
-                maxFootSoundWait = 0.5f;
+                maxFootSoundWait = 0.25f;
 
                 moveRotateY = -2f * maxRotateY * Mathf.Sin(moveTime * 12.56f);
 
@@ -82,7 +83,7 @@ public class MoveControl : MonoBehaviour
             else
             {
                 moveRotateY = -maxRotateY * Mathf.Sin(moveTime * 6.28f);
-                maxFootSoundWait = 1.0f;
+                maxFootSoundWait = 0.5f;
                 animator.SetBool("run", false);
             }
             controller.Move(move * Time.deltaTime * playerSpeed);
@@ -95,12 +96,13 @@ public class MoveControl : MonoBehaviour
                 footSoundWait = 0.0f;
             }
             if(moveTime >= 1.0f) { moveTime = 0.0f; }
-            
+            gMove = true;
             return true;
         }
         else
         {
             footSoundWait = 0.0f;
+            gMove = false;
             return false;
         }
     }
@@ -146,13 +148,4 @@ public class MoveControl : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            controller.detectCollisions = false;
-        }
-    }
-
 }

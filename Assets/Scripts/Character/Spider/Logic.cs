@@ -97,7 +97,6 @@ public class Logic : MonoBehaviour
         //yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         int randomInt = Random.Range(0, AttackSound.Length);
         audioSource.clip = AttackSound[randomInt];
-        audioSource.spatialBlend = 1f;  // ∆Ù”√ 3D “Ù∆µ…Ë÷√
         audioSource.Play();
         attackTimer = 0f;
     }

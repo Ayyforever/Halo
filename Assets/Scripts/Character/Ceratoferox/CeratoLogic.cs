@@ -32,6 +32,12 @@ public class CeratoLogic : MonoBehaviour
     //public GameObject claw2;
     private Transform player;
     private float distance;
+    [Header("ÒôÆµÉèÖÃ")]
+    public AudioSource audioSource;
+    [Header("¹¥»÷")]
+    public AudioClip[] AttackSound = new AudioClip[2];
+    [Header("ÅØÏø")]
+    public AudioClip[] RoarSound = new AudioClip[2];
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +110,9 @@ public class CeratoLogic : MonoBehaviour
         
         //²¥·Å¹¥»÷¶¯»­
         animator.SetTrigger("attack");
-
+        int randomInt = Random.Range(0, AttackSound.Length);
+        audioSource.clip = AttackSound[randomInt];
+        audioSource.Play();
         attackTimer = 0f;
         
     }
@@ -115,6 +123,9 @@ public class CeratoLogic : MonoBehaviour
         agent.isStopped = true;
         animator.SetBool("chase", false);
         animator.SetTrigger("roar");
+        int randomInt = Random.Range(0, RoarSound.Length);
+        audioSource.clip = RoarSound[randomInt];
+        audioSource.Play();
         //1.5±¶¹¥»÷·¶Î§Ö±½Ó¿ÛÑª
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange * 1.5f);
         foreach (Collider obj in colliders)

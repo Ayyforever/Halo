@@ -30,14 +30,19 @@ public class EnemyHealth : MonoBehaviour
         {
             Die();
             int randomInt = Random.Range(0, DeathSound.Length);
-            audioSource.clip = DeathSound[randomInt];
-            audioSource.spatialBlend = 1f;  // ∆Ù”√ 3D “Ù∆µ…Ë÷√
-            audioSource.Play();
+            if (audioSource != null)
+            {
+                audioSource.clip = DeathSound[randomInt];
+                audioSource.spatialBlend = 1f;  // ∆Ù”√ 3D “Ù∆µ…Ë÷√
+                audioSource.Play();
+            }
         }
     }
 
     void Die()
     {
+        if (animator == null)
+            return;
         animator.SetTrigger("die");
         die = true;
         Destroy(gameObject,3f);

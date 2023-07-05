@@ -36,13 +36,17 @@ public class WeaponSway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Rotate();
+        if (!InventorySystem.Instance.isOpen)
+        {
+            Move();
+            Rotate();
+        }
+        
     }
     void Move()
     {
         time += Time.deltaTime;
-        if (moveControl.GMove())
+        if (moveControl.gMove)
         {
             float moveSwayX = maxMoveX * Mathf.Sin(time * 6.28f);
             float moveSwayY = -maxMoveY * Mathf.Abs(Mathf.Cos(time * 6.28f));

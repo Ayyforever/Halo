@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTrashable: 0
-  thisName: 1
-  thisDescription: 1
-  thisFunctionality: 1
+  thisName: whiteCard
+  thisDescription: "\u4E00\u5F20\u767D\u8272\u7684\u5361\uFF0C\u4E0D\u77E5\u9053\u5728\u54EA\u91CC\u7528"
+  thisFunctionality: 
   isRead: 0

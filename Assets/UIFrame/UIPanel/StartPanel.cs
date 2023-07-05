@@ -31,7 +31,7 @@ public class StartPanel : BasePanel
     {
         Scene2 scene2 = new Scene2();
         GameRoot.GetInstance().SceneControl_Root.SceneLoad(scene2.SceneName, scene2);
-        GameRoot.GetInstance().UIManager_Root.Push(new MainPanel());
+        GameRoot.GetInstance().UIManager_Root.Push(new MainPanel());      
     }
 
     public override void OnEnable()

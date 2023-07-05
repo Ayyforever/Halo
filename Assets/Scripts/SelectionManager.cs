@@ -18,7 +18,7 @@ public class SelectionManager : MonoBehaviour
     Text interaction_text;
 
     public Camera c;
-
+    InteractableObject interactable;
     private void Start()
     {
         onTarget = false;
@@ -36,7 +36,7 @@ public class SelectionManager : MonoBehaviour
             Instance = this;
         }
     }
-
+    public string selectionObjectFile;
     void Update()
     {
         Ray ray = c.ScreenPointToRay(Input.mousePosition);
@@ -44,12 +44,13 @@ public class SelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selectionTransform = hit.transform;
-            InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
+            interactable = selectionTransform.GetComponent<InteractableObject>();
             if (interactable && interactable.playerInRange)
             {
                 onTarget = true;
                 selectedObject = interactable.gameObject;
                 interaction_text.text = interactable.GetItemName();
+                selectionObjectFile = interactable.GetFilename();
                 interaction_Info_UI.SetActive(true);
 
             }

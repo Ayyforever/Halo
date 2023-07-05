@@ -21,8 +21,11 @@ public class MouseControl : MonoBehaviour
     }
     void Update()
     {
-
-        Player_MouseControl();
+        if (!InventorySystem.Instance.isOpen)
+        {
+          Player_MouseControl();
+        }
+       
 
     }
 

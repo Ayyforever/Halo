@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class OpenDoor : MonoBehaviour
 {
@@ -11,12 +12,13 @@ public class OpenDoor : MonoBehaviour
     public string itemName;
     public bool isLocked;
 
+    public bool flag;
     public bool state;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        
+        flag = false;
         state = false;
         isLocked = true;
     }
@@ -24,6 +26,14 @@ public class OpenDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (flag)
+        {
+            state = true;
+        }
+        else
+        {
+            state = false;
+        }
         if (isLocked)
         {
             if (CheckNeeds() == true)
@@ -34,14 +44,24 @@ public class OpenDoor : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F) && playerInRange&&state==false && !isLocked)
         {
             anim.SetTrigger("Open");
-            anim.SetTrigger("Open");
-            state = true;
+            anim.SetTrigger("Opened");
+            var component = GetComponent<NavMeshObstacle>();
+            if(component != null)
+            {
+                component.enabled = false;
+            }
+            flag = true;
         }
         if (Input.GetKeyDown(KeyCode.F) && playerInRange&&state && !isLocked)
         {
+            anim.SetTrigger("Close");
             anim.SetTrigger("Closed");
-            anim.SetTrigger("Closed");
-            state = false;
+            var component = GetComponent<NavMeshObstacle>();
+            if (component != null)
+            {
+                component.enabled = true;
+            }
+            flag = false;
         }
     }
 
@@ -51,10 +71,13 @@ public class OpenDoor : MonoBehaviour
 
         for(var i = InventorySystem.Instance.slotList.Count - 1; i >= 0; i--)
         {
+       
             if (InventorySystem.Instance.slotList[i].transform.childCount > 0 )
             {
-                if (InventorySystem.Instance.slotList[i].transform.GetChild(0).name == itemName+"(Clone)")
+               
+                if (InventorySystem.Instance.slotList[i].transform.GetChild(0).name == itemName)
                 {
+                 
                    return true;
                 }
                 

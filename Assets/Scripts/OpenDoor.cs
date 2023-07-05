@@ -41,7 +41,7 @@ public class OpenDoor : MonoBehaviour
                 isLocked = false;
             }
         }
-        if(Input.GetKeyDown(KeyCode.F) && playerInRange&&state==false && !isLocked)
+        if(Input.GetKeyDown(KeyCode.F) && playerInRange && state == false && isLocked == false)
         {
             anim.SetTrigger("Open");
             anim.SetTrigger("Opened");
@@ -52,7 +52,7 @@ public class OpenDoor : MonoBehaviour
             }
             flag = true;
         }
-        if (Input.GetKeyDown(KeyCode.F) && playerInRange&&state && !isLocked)
+        if (Input.GetKeyDown(KeyCode.F) && playerInRange && state == true && isLocked == false)
         {
             anim.SetTrigger("Close");
             anim.SetTrigger("Closed");
@@ -68,19 +68,14 @@ public class OpenDoor : MonoBehaviour
     private bool CheckNeeds()
     {
         if (itemName == "") return true;
-
-        for(var i = InventorySystem.Instance.slotList.Count - 1; i >= 0; i--)
+        for (var i = InventorySystem.Instance.slotList.Count - 1; i >= 0; i--)
         {
-       
             if (InventorySystem.Instance.slotList[i].transform.childCount > 0 )
             {
-               
-                if (InventorySystem.Instance.slotList[i].transform.GetChild(0).name == itemName)
+                if (InventorySystem.Instance.slotList[i].transform.GetChild(0).name == itemName + "(Clone)")
                 {
-                 
                    return true;
                 }
-                
             }
         }
         return false;

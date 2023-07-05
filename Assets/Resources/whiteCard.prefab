@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4518151051540906982}
   - component: {fileID: 6955744111543148518}
   - component: {fileID: 1130011552534685088}
+  - component: {fileID: 8856205097594297969}
   m_Layer: 5
   m_Name: whiteCard
   m_TagString: Untagged
@@ -29,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 4518151051540906980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,3 +103,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9940e50d57696140a6860f9dd982a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8856205097594297969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518151051540906980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac97f5088a8133246a3e102942c8ad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrashable: 0
+  thisName: 1
+  thisDescription: 1
+  thisFunctionality: 1
+  isRead: 0

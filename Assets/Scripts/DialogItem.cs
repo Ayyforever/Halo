@@ -12,6 +12,7 @@ public class DialogItem : MonoBehaviour
     void Start()
     {
         dialogText = Resources.Load(filename) as TextAsset;
+        
     }
 
     // Update is called once per frame

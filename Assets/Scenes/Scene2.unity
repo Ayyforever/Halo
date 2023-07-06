@@ -49589,7 +49589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 537065560815681802, guid: 585faf62079446c47b13a9f876dc805a, type: 3}
       propertyPath: filename
-      value: dialogDoor1
+      value: dialogRader3
       objectReference: {fileID: 0}
     - target: {fileID: 8582405954675237875, guid: 585faf62079446c47b13a9f876dc805a, type: 3}
       propertyPath: m_Size.x
@@ -49659,8 +49659,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 537065560815681802, guid: 585faf62079446c47b13a9f876dc805a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

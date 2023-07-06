@@ -24,7 +24,14 @@ public class StartPanel : BasePanel
 
     private void Back()
     {
-        GameRoot.GetInstance().UIManager_Root.Pop(false);
+        //GameRoot.GetInstance().UIManager_Root.Pop(false);
+        #if UNITY_EDITOR
+            // 在Unity编辑器中运行时，停止播放模式
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        // 在发布的应用程序中调用Application.Quit()函数
+        Application.Quit();
+        #endif
     }
 
     private void Load()

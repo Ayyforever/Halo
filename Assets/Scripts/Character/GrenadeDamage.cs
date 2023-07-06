@@ -34,7 +34,7 @@ public class GrenadeDamage : MonoBehaviour
             if (nearby.GetComponent<EnemyHealth>() != null)
             {
                 float d = Vector3.Distance(nearby.transform.position, transform.position);
-                float damage = (1 - d / explosionRadius) * 100f;
+                float damage =  100f;
                 nearby.GetComponent<EnemyHealth>().Damage(damage);
             }
         }

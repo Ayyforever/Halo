@@ -7,6 +7,8 @@ public class DialogItem : MonoBehaviour
 {
     public bool playerInRange;
     public string filename;
+    public GameObject dialogActivate;
+    public GameObject dialogForbid;
     TextAsset dialogText;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,8 @@ public class DialogItem : MonoBehaviour
         {
             GuideSystem.Instance.dialog.text = dialogText.text;
             GuideSystem.Instance.PlayDialog();
+            if (dialogActivate != null) { dialogActivate.SetActive(true); }
+            if (dialogForbid != null) { dialogForbid.SetActive(false); }
             Destroy(gameObject);
         }
     }

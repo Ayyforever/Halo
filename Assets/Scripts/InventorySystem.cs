@@ -82,7 +82,7 @@ public class InventorySystem : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.B) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.B) && !isOpen && GameRoot.GetInstance().UIManager_Root.stack_ui.Peek().uiType.Name != "SettingsPanel")
         {
               
 

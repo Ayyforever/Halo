@@ -7,8 +7,10 @@ public class InteractableObject : MonoBehaviour
     public bool playerInRange;
 
     public string ItemName;
-
+    public bool Hide;
     public string Filename;
+
+
     public string GetItemName()
     {
         return ItemName;
@@ -18,6 +20,11 @@ public class InteractableObject : MonoBehaviour
     {
         return Filename;
     }
+
+    public bool isHide()
+    {
+        return Hide;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G) && playerInRange&&SelectionManager.Instance.onTarget&&SelectionManager.Instance.selectedObject==gameObject)
@@ -25,7 +32,7 @@ public class InteractableObject : MonoBehaviour
             if (!InventorySystem.Instance.CheckIfFull())
             {
                 InventorySystem.Instance.AddToInventory(ItemName);
-
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Interact>().Pick();
 
                 Destroy(gameObject);
             }

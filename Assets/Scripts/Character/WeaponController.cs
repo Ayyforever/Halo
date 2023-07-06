@@ -133,7 +133,7 @@ public class WeaponController : MonoBehaviour
             Destroy(hitSmokeOb, 1.0f);
             if (hit.collider.gameObject.tag == "Enemy")
             {
-                GetComponent<SkillWp>().power++;
+                GetComponent<SkillWp>().power += 0.01f;
                 hit.collider.gameObject.GetComponentInParent<EnemyHealth>().Damage(20f);
                 GameObject hitBloodOb = Instantiate(hitBlood, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
                 Destroy(hitBloodOb, 0.5f);

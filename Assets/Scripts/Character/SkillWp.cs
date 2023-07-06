@@ -8,7 +8,7 @@ public class SkillWp : MonoBehaviour
     public MouseControl mouseControl;
     //能量
     public float power = 0f;
-    public float powerLimit = 150f;
+    public float powerLimit = 1.5f;
 
     private bool grenadeMode;
 
@@ -47,10 +47,10 @@ public class SkillWp : MonoBehaviour
             }
             timer += Time.deltaTime;
             fireTimer += Time.deltaTime;
+            power -= 3f * Time.deltaTime / 40f;
         }
         if (timer >= 20f && grenadeMode == true)
         {
-            power = 0;
             grenadeMode = false;
             //激活正常射击脚本
             gameObject.GetComponent<WeaponController>().enabled = true;
@@ -67,6 +67,7 @@ public class SkillWp : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && power >= powerLimit)
         {
             //关闭正常射击脚本
+            power = powerLimit;
             gameObject.GetComponent<WeaponController>().enabled = false;
             grenadeMode = true;
             int randomInt = Random.Range(0, ActivateSound.Length);

@@ -13,7 +13,7 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
     private GameObject itemInfoUI;
 
 
-    string filename;
+    public string filename;
 
     private Text itemInfoUI_itemName;
     private Text itemInfoUI_itemDescription;
@@ -68,7 +68,7 @@ public class InventoryItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
             if (isRead)
             {
 
-                filename = SelectionManager.Instance.selectionObjectFile;
+                
                 plotText = Resources.Load(filename) as TextAsset;
                 InventorySystem.Instance.itemPlot.text = plotText.text;
                 InventorySystem.Instance.inventoryScreenUI.SetActive(false);

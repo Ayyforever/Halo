@@ -48,12 +48,16 @@ namespace Michsky.UI.Shift
 
         void Update()
         {
-            //Transform target = transform.Find("Player/摄像机/Weapon/MainWp");
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Camera camera = player.GetComponentInChildren<Camera>();
-            GameObject weapon = camera.transform.Find("Weapon").gameObject;
-            GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
-            WeaponController weaponController = mainWp.GetComponent<WeaponController>();
+            if (GameObject.FindGameObjectWithTag("Player"))
+            {
+                //Transform target = transform.Find("Player/摄像机/Weapon/MainWp");
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                Camera camera = player.GetComponentInChildren<Camera>();
+                GameObject weapon = camera.transform.Find("Weapon").gameObject;
+                GameObject mainWp = weapon.transform.Find("MainWp").gameObject;
+                WeaponController weaponController = mainWp.GetComponent<WeaponController>();
+            }
+            
 
 
 

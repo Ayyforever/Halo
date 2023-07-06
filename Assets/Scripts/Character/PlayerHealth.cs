@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public MouseControl mouseControl;
+    public DeathPlay deathPlay;
     public AudioSource audioSource;
     public AudioClip[] DamageSound = new AudioClip[5];
     private float damageTime = 0.0f;
@@ -28,13 +29,24 @@ public class PlayerHealth : MonoBehaviour
     }
     public void Damage(float damage)
     {
-        hp -= damage;
-        damageTime = Time.deltaTime;
-        PlayDamageSound();
-        if (hp <= 0)
+        if(hp > 1f)
         {
-            Debug.Log("die");
-            //Die();
+            hp -= damage;
+            damageTime = Time.deltaTime;
+            PlayDamageSound();
+            if (hp <= 1f)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                GameRoot.GetInstance().UIManager_Root.Pop(true);
+                GameRoot.GetInstance().UIManager_Root.Push(new DiePanel());
+                gameObject.GetComponent<MouseControl>().enabled = false;
+                gameObject.GetComponent<MoveControl>().enabled = false;
+                Transform childTransform = transform.Find("ÉãÏñ»ú");
+                childTransform = childTransform.Find("Weapon");
+                childTransform = childTransform.Find("MainWp");
+                childTransform.gameObject.SetActive(false);
+                deathPlay.PlayDeathSound();
+            }
         }
     }
     void PlayDamageSound()

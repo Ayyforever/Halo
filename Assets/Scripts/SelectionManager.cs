@@ -49,7 +49,15 @@ public class SelectionManager : MonoBehaviour
             {
                 onTarget = true;
                 selectedObject = interactable.gameObject;
-                interaction_text.text = interactable.GetItemName();
+                if (!interactable.isHide())
+                {
+                    interaction_text.text = interactable.GetItemName();
+                }
+                else
+                {
+                    interaction_text.text = "Ïä×Ó";
+                }
+                
                 selectionObjectFile = interactable.GetFilename();
                 interaction_Info_UI.SetActive(true);
 
